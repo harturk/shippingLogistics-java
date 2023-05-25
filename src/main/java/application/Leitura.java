@@ -6,8 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import model.Acervo;
-
 /**
  * Classe de Leitura. Código trazido da aula, com um pequeno ajuste onde
  * inclui-se um
@@ -16,17 +14,14 @@ import model.Acervo;
 
 public class Leitura {
     private String path;
-    private Acervo acervo;
     private boolean hasHeader = false;
 
-    public Leitura(String path, Acervo acervo) {
+    public Leitura(String path) {
         this.path = path;
-        this.acervo = acervo;
     }
 
-    public Leitura(String path, boolean hasHeader, Acervo acervo) {
+    public Leitura(String path, boolean hasHeader) {
         this.path = path;
-        this.acervo = acervo;
         this.hasHeader = hasHeader;
     }
 
@@ -49,10 +44,8 @@ public class Leitura {
                 precoBase = sc.next().trim(); // Segundo campo: preco base
                 tipo = sc.next().trim(); // Terceiro campo: tipo
                 categoriaDuracao = sc.next().trim(); // Quarto campo: categoria ou duracao
-                String message = acervo.add(titulo, precoBase, tipo, categoriaDuracao);
-
+                // Método para adicionar
                 // Mensagem de inserção ou não
-                System.out.println(message);
             }
         } catch (IOException e1) {
             System.err.format("Erro de E/S: %s%n", e1);
