@@ -1,23 +1,14 @@
 package entity;
 
-public class TipoCarga {
+public abstract class TipoCarga {
     private int numero;
     private String descricao;
     private double fator;
 
-    public TipoCarga(int numero, String descricao, String tipo) {
+    public TipoCarga(int numero, String descricao, double fator) {
         this.numero = numero;
         this.descricao = descricao;
-        switch (tipo) {
-            case "PERECIVEL":
-                this.fator = 2.0;
-                break;
-            case "DURAVEL":
-                this.fator = 1.5;
-                break;
-            default:
-                throw new IllegalArgumentException("Tipo de carga inválido");
-        }
+        this.fator = fator;
     }
 
     public int getNumero() {
