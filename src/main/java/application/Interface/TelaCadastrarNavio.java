@@ -22,8 +22,8 @@ public class TelaCadastrarNavio extends JFrame{
     public TelaCadastrarNavio() {
         JFrame frame = new JFrame("Cadastrar Navio");
         this.setTitle("Cadastrar Navio");
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(400, 300);
+        
         this.setBounds(100, 100, 500, 300);
         this.setResizable(true);
         this.setLocationRelativeTo(null);
@@ -77,6 +77,8 @@ public class TelaCadastrarNavio extends JFrame{
                 lista.cadastrarNavio(nomeN, velocidadeN, autonomiaN, custoPorMilhaN);
             }
         });
+
+
 
         
     }
