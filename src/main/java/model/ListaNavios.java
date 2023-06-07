@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class ListaNavios {
+    private static ListaNavios instancia;
     private ArrayList<Navio> lista;
 
     // inner class
@@ -19,8 +20,15 @@ public class ListaNavios {
 
     }
 
-    public ListaNavios() {
+    private ListaNavios() {
         lista = new ArrayList<Navio>();
+    }
+
+    public static ListaNavios listaNavios(){
+        if(instancia==null){
+            instancia = new ListaNavios();
+        }
+        return instancia;
     }
 
     public void cadastrarNavio(String nome, double velocidade, double autonomia, double custoMilhaPorMilhaBasico) {
@@ -34,6 +42,8 @@ public class ListaNavios {
         ordenaLista();
 
     }
+
+    
 
     private boolean igual(Navio navio) {
         String nomeNavio = navio.getNome().trim().toUpperCase();
