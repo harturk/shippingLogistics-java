@@ -34,7 +34,6 @@ public class TelaCadastraPorto extends JFrame{
         this.add(this.pais);
         this.add(this.id);
 
-        this.setVisible(true);
     }
     
 }
