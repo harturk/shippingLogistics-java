@@ -17,8 +17,8 @@ public class TelaCadastrarNavio extends JFrame {
     private JTextField custoPorMilha;
     private JButton cadastrar;
     private JButton limpa;
-    private JLabel nomeStatus = new JLabel();
-    private JLabel velocidadeStatus = new JLabel();
+    private JLabel nomeStatus = new JLabel();       //Precisa ser instanciando antes se não pode dar uma execao
+    private JLabel velocidadeStatus = new JLabel(); // na hora de apertar o botao limpar
     private JLabel autonomiaStatus = new JLabel();
     private JLabel custoPorMilhaStatus = new JLabel();
 
@@ -54,6 +54,9 @@ public class TelaCadastrarNavio extends JFrame {
 
     }
 
+    /**
+     * Define o textfield nome e o texto
+     */
     private void setNome() {
         JLabel nomeLabel = new JLabel("Nome:");
         nomeLabel.setBounds(10, 10, 50, 20);
@@ -64,6 +67,9 @@ public class TelaCadastrarNavio extends JFrame {
         this.add(nome);
     }
 
+    /**
+     * Define o textfield velocidade e o texto
+     */
     private void setVelocidade() {
         JLabel velocidadeLabel = new JLabel("Velocidade:");
         velocidadeLabel.setBounds(10, 40, 100, 20);
@@ -74,6 +80,9 @@ public class TelaCadastrarNavio extends JFrame {
         this.add(velocidade);
     }
 
+    /**
+     * Define o textfield autonomia e o texto
+     */
     private void setAutonomia() {
         JLabel autonomiaLabel = new JLabel("Autonomia:");
         autonomiaLabel.setBounds(10, 70, 100, 20);
@@ -84,6 +93,9 @@ public class TelaCadastrarNavio extends JFrame {
         this.add(autonomia);
     }
 
+    /**
+     * Define o textfield custoPorMilha e o texto
+     */
     private void setCustoPorMilha() {
         JLabel custoPorMilhaLabel = new JLabel("Custo por Milha:");
         custoPorMilhaLabel.setBounds(10, 100, 125, 20);
@@ -94,6 +106,9 @@ public class TelaCadastrarNavio extends JFrame {
         this.add(custoPorMilha);
     }
 
+    /**
+     * Define o botao cadastrar e alem de dar uma funcao para ele
+     */
     private void setBotaoCadastrar() {
         cadastrar = new JButton("Cadastrar");
         cadastrar.setBounds(10, 130, 125, 20);
@@ -127,6 +142,10 @@ public class TelaCadastrarNavio extends JFrame {
         });
     }
 
+    /**
+     * Define o borao limpar que limpa todas as areas digitaveis
+     * e o texto do ultimo navio cadastrado
+     */
     private void setBotaoLimpa() {
         limpa = new JButton("Limpar");
         limpa.setBounds(210, 130, 125, 20);
@@ -147,6 +166,9 @@ public class TelaCadastrarNavio extends JFrame {
         });
     }
 
+    /**
+     * Escreve o ultimo navio que foi cadastrado
+     */
     private void setUltimoCadastro(String nomeN, double velocidadeN, double autonomiaN, double custoPorMilhaN) {
         nomeStatus.setText("Nome do Navio: " + nomeN);
         nomeStatus.setBounds(10, 160, 335, 20);
