@@ -1,24 +1,29 @@
 package application.Interface;
 
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 public class TelaDeAviso extends JFrame{
-    public TelaDeAviso(String aviso){
+    private JButton ok;
+    public TelaDeAviso(String aviso) {
         setTitle("Aviso");
-        setSize(300, 200);
+        setSize(300, 100);
         setLocationRelativeTo(null);
-        FlowLayout flowLayout = new FlowLayout();
-        flowLayout.setAlignment(FlowLayout.CENTER);
-
-        setLayout(flowLayout);
         setResizable(false);
-        JLabel problema = new JLabel(aviso);
-        problema.setBounds(10, 100, 125, 20);
 
-        add(problema);
+        JPanel grid = new JPanel();
+        grid.setLayout(new GridLayout(2, 1));
+
+        JLabel problema = new JLabel(aviso);
+        ok = new JButton("OK");
+        ok.addActionListener(e -> dispose());
+
+        grid.add(problema);
+        grid.add(ok);
+
+        setContentPane(grid);
         setVisible(true);
     }
 }

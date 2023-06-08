@@ -77,7 +77,7 @@ public class TelaCadastrarNavio extends JFrame{
                 lista.cadastrarNavio(nomeN, velocidadeN, autonomiaN, custoPorMilhaN);                
                 } catch (NumberFormatException f) {
                     // TODO: handle exception
-                    TelaDeAviso aviso = new TelaDeAviso("TU È BURRo");
+                    TelaDeAviso aviso = new TelaDeAviso("Colocou alguma letra em lugar de numeros");
                 }
 
                 
