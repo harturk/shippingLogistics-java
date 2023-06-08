@@ -21,7 +21,6 @@ public class Navio {
         return this.nome;
     }
 
-
     /**
      * 
      * @return valocidade
@@ -29,7 +28,6 @@ public class Navio {
     public double getVelocidade() {
         return this.velocidade;
     }
-
 
     /**
      * 
@@ -40,6 +38,7 @@ public class Navio {
     }
 
     /**
+     * 
      * 
      * @return custoPorMilhaBasico
      */
