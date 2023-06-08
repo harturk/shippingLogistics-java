@@ -55,6 +55,7 @@ public class TelaCadastrarNavio extends JFrame {
     }
 
     /**
+     * 
      * Define o textfield nome e o texto
      */
     private void setNome() {
