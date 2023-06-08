@@ -13,7 +13,6 @@ public class TelaPrincipal extends JFrame {
     private JButton botaoConsultarTodasAsCargas;
     private JTextField nomeDoArquivo;
     private JButton carregarNovoArquvio;
-    private static JButton botaoTelaPrincipal;
 
     public TelaPrincipal() {
         this.setTitle("Menu Principal");
@@ -117,18 +116,7 @@ public class TelaPrincipal extends JFrame {
         });
     }
     
-    // private void setBotaoTelaPrincipal(){
-    //     this.botaoTelaPrincipal = new JButton("Voltar");
-    //     this.botaoTelaPrincipal.setBounds(390, 225, 100, 30);
-    //     this.botaoTelaPrincipal.addActionListener(new ActionListener() {
-    //         @Override
-    //         public void actionPerformed(ActionEvent e) {
-    //             TelaPrincipal telaPrincipal = new TelaPrincipal();
-    //             telaPrincipal.setVisible(true);
-    //             dispose();
-    //         }
-    //     });
-    // }
+    
 
     
 }
