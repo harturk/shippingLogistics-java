@@ -10,7 +10,10 @@ public class ListaNavios {
     private static ListaNavios instancia;
     private ArrayList<Navio> lista;
 
-    // inner class
+
+    /**
+     *  inner class para definir o comparator
+     */
     private class NavioNomeComparator implements Comparator<Navio> {
 
         @Override
@@ -20,10 +23,17 @@ public class ListaNavios {
 
     }
 
+    /**
+     * O constructor esta private pelo motivo que o objeto é um singleton
+     */
     private ListaNavios() {
         lista = new ArrayList<Navio>();
     }
 
+    /**
+     * Cria o objeto se for a primeira vez
+     * @return O objeto em si
+     */
     public static ListaNavios listaNavios(){
         if(instancia==null){
             instancia = new ListaNavios();
@@ -31,6 +41,14 @@ public class ListaNavios {
         return instancia;
     }
 
+    /**
+     * Cadastra o navio se nada estiver errado
+     * @param nome é o nome do navio e o nome precisa ser unico
+     * @param velocidade precisa ser maior que zero
+     * @param autonomia precisa ser maior que zero
+     * @param custoMilhaPorMilhaBasico precisa ser maior que zero
+     * @throws Exception se tentar cadastrar um navio com paramentro errados ira dar uma execao
+     */
     public void cadastrarNavio(String nome, double velocidade, double autonomia, double custoMilhaPorMilhaBasico) throws Exception {
         Navio novoNavio = new Navio(nome, velocidade, autonomia, custoMilhaPorMilhaBasico);
         if (igual(novoNavio)) {
@@ -49,7 +67,11 @@ public class ListaNavios {
     }
 
     
-
+    /**
+     * Verifica se tem um navio com mesmo nome na lista
+     * @param navio que deseja verificar
+     * @return  true se tiver um navio igual
+     */
     private boolean igual(Navio navio) {
         String nomeNavio = navio.getNome().trim().toUpperCase();
         for (Navio n : lista) {
@@ -61,6 +83,9 @@ public class ListaNavios {
         return false;
     }
 
+    /**
+     * ordena a lista
+     */
     private void ordenaLista() {
         NavioNomeComparator comparator = new NavioNomeComparator();
         Collections.sort(lista, comparator);

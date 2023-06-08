@@ -13,18 +13,36 @@ public class Navio {
         this.custoPorMilhaBasico = custoMilhaPorMilhaBasico;
     }
 
+    /**
+     * 
+     * @return nome
+     */
     public String getNome() {
         return this.nome;
     }
 
+
+    /**
+     * 
+     * @return valocidade
+     */
     public double getVelocidade() {
         return this.velocidade;
     }
 
+
+    /**
+     * 
+     * @return autonomia
+     */
     public double getAutonomia() {
         return this.autonomia;
     }
 
+    /**
+     * 
+     * @return custoPorMilhaBasico
+     */
     public double getCustoPorMilhaBasico() {
         return this.custoPorMilhaBasico;
     }
