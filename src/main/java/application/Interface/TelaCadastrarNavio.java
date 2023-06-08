@@ -10,20 +10,18 @@ import model.ListaNavios;
 import java.awt.*;
 import java.awt.event.*;
 
-
-public class TelaCadastrarNavio extends JFrame{
+public class TelaCadastrarNavio extends JFrame {
     private JTextField nome;
     private JTextField velocidade;
     private JTextField autonomia;
     private JTextField custoPorMilha;
     private JButton cadastrar;
-    
 
     public TelaCadastrarNavio() {
         JFrame frame = new JFrame("Cadastrar Navio");
         this.setTitle("Cadastrar Navio");
         this.setSize(400, 300);
-        
+
         this.setBounds(100, 100, 500, 300);
         this.setResizable(true);
         this.setLocationRelativeTo(null);
@@ -65,30 +63,31 @@ public class TelaCadastrarNavio extends JFrame{
         cadastrar.setBounds(10, 130, 125, 20);
         this.add(cadastrar);
         cadastrar.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nomeN = nome.getText();
-                try {
-                double velocidadeN = Double.parseDouble(velocidade.getText());
-                double autonomiaN = Double.parseDouble(autonomia.getText());
-                double custoPorMilhaN = Double.parseDouble(custoPorMilha.getText());    
-                ListaNavios lista = ListaNavios.listaNavios();
-                lista.cadastrarNavio(nomeN, velocidadeN, autonomiaN, custoPorMilhaN);                
-                } catch (NumberFormatException f) {
-                    // TODO: handle exception
-                    TelaDeAviso aviso = new TelaDeAviso("Colocou alguma letra em lugar de numeros");
-                }
+                String estouro = "Velocidade";
 
-                
+                try {
+                    String nomeN = nome.getText();
+                    double velocidadeN = Double.parseDouble(velocidade.getText());
+                    estouro = "Autonomia";
+                    double autonomiaN = Double.parseDouble(autonomia.getText());
+                    estouro = "Custo por milha";
+
+                    double custoPorMilhaN = Double.parseDouble(custoPorMilha.getText());
+                    ListaNavios lista = ListaNavios.listaNavios();
+                    lista.cadastrarNavio(nomeN, velocidadeN, autonomiaN, custoPorMilhaN);
+                } catch (NumberFormatException f) {
+
+                    TelaDeAviso aviso = new TelaDeAviso("Entrada invalida na parte de "+ estouro+", " + estouro+" só aceita numeros positivos");
+                } catch (Exception e1) {
+                    TelaDeAviso aviso = new TelaDeAviso(e1.getMessage());
+                }
 
             }
         });
 
-
-
-        
     }
 
-    
 }
