@@ -69,12 +69,19 @@ public class TelaCadastrarNavio extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nomeN = nome.getText();
+                try {
                 double velocidadeN = Double.parseDouble(velocidade.getText());
                 double autonomiaN = Double.parseDouble(autonomia.getText());
-                double custoPorMilhaN = Double.parseDouble(custoPorMilha.getText());
-                
+                double custoPorMilhaN = Double.parseDouble(custoPorMilha.getText());    
                 ListaNavios lista = ListaNavios.listaNavios();
-                lista.cadastrarNavio(nomeN, velocidadeN, autonomiaN, custoPorMilhaN);
+                lista.cadastrarNavio(nomeN, velocidadeN, autonomiaN, custoPorMilhaN);                
+                } catch (NumberFormatException f) {
+                    // TODO: handle exception
+                    TelaDeAviso aviso = new TelaDeAviso("TU È BURRo");
+                }
+
+                
+
             }
         });
 
