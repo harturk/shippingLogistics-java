@@ -31,11 +31,16 @@ public class ListaNavios {
         return instancia;
     }
 
-    public void cadastrarNavio(String nome, double velocidade, double autonomia, double custoMilhaPorMilhaBasico) {
+    public void cadastrarNavio(String nome, double velocidade, double autonomia, double custoMilhaPorMilhaBasico) throws Exception {
         Navio novoNavio = new Navio(nome, velocidade, autonomia, custoMilhaPorMilhaBasico);
         if (igual(novoNavio)) {
-            System.err.println("Navio com o mesmo nome já foi cadastrado, o cadastro foi cancelado.");
-            return;
+            throw new Exception("Navio com o mesmo nome já foi cadastrado, o cadastro foi cancelado.");
+        }else if (velocidade<= 0){
+            throw new Exception("A velocidade do navio não pode ser menor ou igual a zero, cadastro foi cancelado.");
+        }else if (autonomia <= 0){
+            throw new Exception("A Autonomia do navio não pode ser menor ou igual a zero, cadastro foi cancelado.");
+        }else if (custoMilhaPorMilhaBasico<= 0){
+            throw new Exception("O custo por milha do navio não pode ser menor ou igual a zero, cadastro foi cancelado.");
         }
         lista.add(novoNavio);
 
