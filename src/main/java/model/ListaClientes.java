@@ -7,6 +7,7 @@ import java.util.Comparator;
 
 public class ListaClientes {
     private ArrayList<Cliente> lista;
+    private static ListaClientes instance;
 
     // inner class
     private class ClienteCodComparator implements Comparator<Cliente> {
@@ -17,7 +18,14 @@ public class ListaClientes {
         }
     }
 
-    public ListaClientes() {
+    public static ListaClientes listaClientes() {
+        if (instance == null) {
+            instance = new ListaClientes();
+        }
+        return instance;
+    }
+
+    private ListaClientes() {
         lista = new ArrayList<Cliente>();
     }
 
