@@ -23,8 +23,7 @@ public class TelaCadastrarNavio extends JFrame {
     private JLabel custoPorMilhaStatus = new JLabel();
 
     public TelaCadastrarNavio() {
-        JFrame frame = new JFrame("Cadastrar Navio");
-        this.setTitle("Cadastrar Navio");
+        super("Cadastrar Navio");
         this.setSize(345, 300);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -41,6 +40,7 @@ public class TelaCadastrarNavio extends JFrame {
         setBotaoCadastrar();
 
         setBotaoLimpa();
+
 
         this.add(nomeStatus);
 
