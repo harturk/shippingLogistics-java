@@ -15,7 +15,7 @@ public class TelaPrincipal extends JFrame {
     private JButton carregarNovoArquvio;
 
     public TelaPrincipal() {
-        this.setTitle("Menu Principal");
+        super("Menu Principal");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBounds(100, 100, 500, 300);
         this.setResizable(false);
@@ -41,7 +41,7 @@ public class TelaPrincipal extends JFrame {
     }
 
     private void setBotaoCadastrarPorto() {
-        this.botaoCadastrarPorto = new JButton("Cadastrar Porto");
+        this.botaoCadastrarPorto = new JButton("Cadastrar porto");
         this.botaoCadastrarPorto.setBounds(10, 10, 230, 30);
         this.botaoCadastrarPorto.addActionListener(new ActionListener() {
             @Override
@@ -53,7 +53,7 @@ public class TelaPrincipal extends JFrame {
     }
 
     private void setBotaoCadastrarNavio() {
-        this.botaoCadastrarNavio = new JButton("Cadastrar Navio");
+        this.botaoCadastrarNavio = new JButton("Cadastrar navio");
         this.botaoCadastrarNavio.setBounds(260, 10, 230, 30);
         this.botaoCadastrarNavio.addActionListener(new ActionListener() {
             @Override
@@ -65,14 +65,13 @@ public class TelaPrincipal extends JFrame {
     }
 
     private void setBotaoCadastrarCliente() {
-        this.botaoCadastrarCliente = new JButton("Cadastrar Navio");
+        this.botaoCadastrarCliente = new JButton("Cadastrar cliente");
         this.botaoCadastrarCliente.setBounds(10, 50, 230, 30);
         this.botaoCadastrarCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaCadastraPorto telaCadastrarPorto = new TelaCadastraPorto();
-                telaCadastrarPorto.setVisible(true);
-                dispose();
+                TelaCadastrarCliente a = new TelaCadastrarCliente();
+                a.setVisible(true);
             }
         });
     }
@@ -83,9 +82,8 @@ public class TelaPrincipal extends JFrame {
         this.botaoCadastrarTipoDeCarga.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaCadastraPorto telaCadastrarPorto = new TelaCadastraPorto();
-                telaCadastrarPorto.setVisible(true);
-                dispose();
+                TelaCadastraTipoCarga a = new TelaCadastraTipoCarga();
+                a.setVisible(true);
             }
         });
     }

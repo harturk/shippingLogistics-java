@@ -11,7 +11,7 @@ public class TelaDeAviso extends JFrame {
     private JLabel problema;
 
     public TelaDeAviso(String aviso) {
-        setTitle("Aviso");
+        super("aviso");
         setResizable(false);
 
         JPanel grid = new JPanel();
