@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class ListaPortos {
+    private static ListaPortos listaPortos;
     private ArrayList<Porto> lista;
 
     // inner class
@@ -19,7 +20,14 @@ public class ListaPortos {
 
     }
 
-    public ListaPortos() {
+    public static ListaPortos listaPortos() {
+        if(listaPortos == null) {
+            listaPortos = new ListaPortos();
+        }
+        return listaPortos;
+    }
+
+    private ListaPortos() {
         lista = new ArrayList<Porto>();
     }
 
