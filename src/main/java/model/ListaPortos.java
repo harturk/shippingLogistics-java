@@ -31,11 +31,12 @@ public class ListaPortos {
         lista = new ArrayList<Porto>();
     }
 
-    public void cadastrarPorto(int id, String nome, String pais) {
+    public void cadastrarPorto(int id, String nome, String pais) throws Exception {
         Porto novoPorto = new Porto(id, nome, pais);
         if (igual(novoPorto)) {
-            System.err.println("Porto com o mesmo identificador já foi cadastrado, o cadastro foi cancelado.");
-            return;
+            throw new Exception("Porto com o mesmo identificador já foi cadastrado, o cadastro foi cancelado.");
+        }else if(id<0) {
+            throw new Exception("O identificador do porto não pode ser negativo, o cadastro foi cancelado.");
         }
         lista.add(novoPorto);
         ordenaLista();
