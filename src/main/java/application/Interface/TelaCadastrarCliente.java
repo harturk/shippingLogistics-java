@@ -94,10 +94,17 @@ public class TelaCadastrarCliente extends JFrame {
                 } else {
                     String nomeC = nome.getText();
                     String emailC = email.getText();
-                    int codC = Integer.parseInt(cod.getText());
-                    ListaClientes lista = ListaClientes.listaClientes();
-                    lista.cadastrarCliente(codC, nomeC, emailC);
-                    setUltimoCadastro(codC, nomeC, emailC);
+                    try {
+                        int codC = Integer.parseInt(cod.getText());
+                        ListaClientes lista = ListaClientes.listaClientes();
+                        lista.cadastrarCliente(codC, nomeC, emailC);
+                        setUltimoCadastro(codC, nomeC, emailC);
+                    } catch (NumberFormatException f) {
+                        JOptionPane.showMessageDialog(null, "Entrada invalida na entrada de COD, só é permetido numeros postivos");
+                    } catch (Exception f) {
+                        JOptionPane.showMessageDialog(null, f.getMessage());
+                    }
+
 
                 }
             }
