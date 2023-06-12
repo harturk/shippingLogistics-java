@@ -19,7 +19,7 @@ public class ListaClientes {
     }
 
     public static ListaClientes listaClientes() {
-        if (instance == null) {
+        if(instance == null) {
             instance = new ListaClientes();
         }
         return instance;
@@ -29,12 +29,12 @@ public class ListaClientes {
         lista = new ArrayList<Cliente>();
     }
 
-    public void cadastrarCliente(int cod, String nome, String email) {
+    public void cadastrarCliente(int cod, String nome, String email) throws Exception {
         Cliente novoCliente = new Cliente(cod, nome, email);
         if (igual(novoCliente)) {
-            System.err.println(
-                    "Cliente com o mesmo email ou mesmo código já foi cadastrado, o cadastro foi cancelado.");
-            return;
+            throw new Exception("Cliente com o mesmo email ou mesmo código já foi cadastrado, o cadastro foi cancelado.");
+        }else if(cod<0){
+            throw new Exception("O codigo do cliente não pode ser negativo, o cadastro foi cancelado.");
         }
         lista.add(novoCliente);
         ordenaLista();
