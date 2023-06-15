@@ -1,11 +1,9 @@
 package application;
 
+import application.Interface.TelaPrincipal;
+
 public class App {
-
-    public App() {
-    }
-
     public void executar() {
-
+        new TelaPrincipal();
     }
 }

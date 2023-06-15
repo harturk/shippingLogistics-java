@@ -85,7 +85,6 @@ public class TelaCadastrarCliente extends JFrame {
         cadastrar.setBounds(10, 120, 125, 20);
         this.add(cadastrar);
 
-
         cadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -100,11 +99,11 @@ public class TelaCadastrarCliente extends JFrame {
                         lista.cadastrarCliente(codC, nomeC, emailC);
                         setUltimoCadastro(codC, nomeC, emailC);
                     } catch (NumberFormatException f) {
-                        JOptionPane.showMessageDialog(null, "Entrada invalida na entrada de COD, só é permetido numeros postivos");
+                        JOptionPane.showMessageDialog(null,
+                                "Entrada invalida na entrada de COD, só é permetido numeros postivos");
                     } catch (Exception f) {
                         JOptionPane.showMessageDialog(null, f.getMessage());
                     }
-
 
                 }
             }

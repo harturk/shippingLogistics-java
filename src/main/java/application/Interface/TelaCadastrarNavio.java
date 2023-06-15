@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.*;
 
 import model.ListaNavios;
 
@@ -17,7 +18,7 @@ public class TelaCadastrarNavio extends JFrame {
     private JTextField custoPorMilha;
     private JButton cadastrar;
     private JButton limpa;
-    private JLabel nomeStatus = new JLabel();       //Precisa ser instanciando antes se não pode dar uma execao
+    private JLabel nomeStatus = new JLabel(); // Precisa ser instanciando antes se não pode dar uma execao
     private JLabel velocidadeStatus = new JLabel(); // na hora de apertar o botao limpar
     private JLabel autonomiaStatus = new JLabel();
     private JLabel custoPorMilhaStatus = new JLabel();
@@ -41,7 +42,6 @@ public class TelaCadastrarNavio extends JFrame {
 
         setBotaoLimpa();
 
-
         this.add(nomeStatus);
 
         this.add(velocidadeStatus);
@@ -49,8 +49,7 @@ public class TelaCadastrarNavio extends JFrame {
         this.add(autonomiaStatus);
 
         this.add(custoPorMilhaStatus);
-
-
+        setVisible(true);
 
     }
 
@@ -132,11 +131,10 @@ public class TelaCadastrarNavio extends JFrame {
                     lista.cadastrarNavio(nomeN, velocidadeN, autonomiaN, custoPorMilhaN);
                     setUltimoCadastro(nomeN, velocidadeN, autonomiaN, custoPorMilhaN);
                 } catch (NumberFormatException f) {
-
-                    TelaDeAviso aviso = new TelaDeAviso("Entrada invalida na parte de " + estouro + ", " + estouro
+                    JOptionPane.showMessageDialog(null, "Entrada invalida na parte de " + estouro + ", " + estouro
                             + " só aceita numeros positivos");
                 } catch (Exception e1) {
-                    TelaDeAviso aviso = new TelaDeAviso(e1.getMessage());
+                    JOptionPane.showMessageDialog(null, e1.getMessage());
                 }
 
             }
@@ -182,8 +180,6 @@ public class TelaCadastrarNavio extends JFrame {
 
         custoPorMilhaStatus.setText("Custo por milha basico:" + custoPorMilhaN);
         custoPorMilhaStatus.setBounds(10, 220, 335, 20);
-
-
 
     }
 

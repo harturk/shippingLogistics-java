@@ -38,6 +38,7 @@ public class TelaCadastraPorto extends JFrame {
         this.add(statusNome);
         this.add(statusPais);
         this.add(statusId);
+        setVisible(true);
 
     }
 
@@ -89,10 +90,10 @@ public class TelaCadastraPorto extends JFrame {
                     setStatusPais(paisP);
                     setStatusId(idP);
                 } catch (NumberFormatException f) {
-                    TelaDeAviso erro = new TelaDeAviso("Entrada invalida na parte de ID");
+                    JOptionPane.showMessageDialog(null, "Entrada invalida na parte de ID");
 
                 } catch (Exception f) {
-                    TelaDeAviso erro = new TelaDeAviso(f.getMessage());
+                    JOptionPane.showMessageDialog(null, f.getMessage());
                 }
 
             }
