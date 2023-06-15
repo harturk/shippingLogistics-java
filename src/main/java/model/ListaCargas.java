@@ -14,7 +14,7 @@ public class ListaCargas {
 
         @Override
         public int compare(Carga carga1, Carga carga2) {
-            return Integer.compare(carga1.getIndentificador(), carga2.getIndentificador());
+            return Integer.compare(carga1.getId(), carga2.getId());
         }
     }
 
@@ -38,9 +38,9 @@ public class ListaCargas {
     }
 
     private boolean igual(Carga carga) {
-        int cargaId = carga.getIndentificador();
+        int cargaId = carga.getId();
         for (Carga c : lista) {
-            if (cargaId == c.getIndentificador()) {
+            if (cargaId == c.getId()) {
                 return true;
             }
         }
