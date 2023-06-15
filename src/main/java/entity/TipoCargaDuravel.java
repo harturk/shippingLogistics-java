@@ -23,4 +23,9 @@ public class TipoCargaDuravel extends TipoCarga {
     public double getIpi() {
         return this.ipi;
     }
+
+    public String toString() {
+        return super.toString() + " Setor:" + this.getSetor() + " Material:" + this.getMaterial() + " Ipi:"
+                + this.getIpi();
+    }
 }

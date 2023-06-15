@@ -22,4 +22,9 @@ public abstract class TipoCarga {
     public double getFator() {
         return this.fator;
     }
+
+    public String toString() {
+        return "Numero: " + this.numero + " Descricao: " + this.descricao;
+    }
+
 }
