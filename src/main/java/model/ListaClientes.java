@@ -19,7 +19,7 @@ public class ListaClientes {
     }
 
     public static ListaClientes listaClientes() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new ListaClientes();
         }
         return instance;
@@ -31,20 +31,35 @@ public class ListaClientes {
 
     public void cadastrarCliente(int cod, String nome, String email) throws Exception {
         Cliente novoCliente = new Cliente(cod, nome, email);
-        if (igual(novoCliente)) {
-            throw new Exception("Cliente com o mesmo email ou mesmo código já foi cadastrado, o cadastro foi cancelado.");
-        }else if(cod<0){
+        if (igualCod(novoCliente)) {
+            throw new Exception(
+                    "Cliente com o mesmo código já foi cadastrado, o cadastro foi cancelado.");
+        }
+        if (igualEmail(novoCliente)) {
+            throw new Exception(
+                    "Cliente com o mesmo email já foi cadastrado, o cadastro foi cancelado.");
+        }
+        if (cod < 0) {
             throw new Exception("O codigo do cliente não pode ser negativo, o cadastro foi cancelado.");
         }
         lista.add(novoCliente);
         ordenaLista();
     }
 
-    private boolean igual(Cliente cliente) {
+    private boolean igualCod(Cliente cliente) {
         int clienteCod = cliente.getCod();
+        for (Cliente c : lista) {
+            if (clienteCod == c.getCod()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean igualEmail(Cliente cliente) {
         String clienteEmail = cliente.getEmail();
         for (Cliente c : lista) {
-            if (clienteCod == c.getCod() || clienteEmail.equals(c.getEmail())) {
+            if (clienteEmail.equals(c.getEmail())) {
                 return true;
             }
         }
