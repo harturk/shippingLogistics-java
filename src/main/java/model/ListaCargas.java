@@ -5,9 +5,14 @@ import entity.TipoCarga;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Map;
+import java.util.TreeMap;
+
+import application.enums.Situacao;
 
 public class ListaCargas {
     private ArrayList<Carga> lista;
+    private Map<Integer, Situacao> situacao;
 
     // inner class
     private class CargaIdComparator implements Comparator<Carga> {
@@ -20,6 +25,7 @@ public class ListaCargas {
 
     public ListaCargas() {
         lista = new ArrayList<Carga>();
+        situacao = new TreeMap<>();
     }
 
     public void cadastrarCarga(
@@ -34,6 +40,7 @@ public class ListaCargas {
             return;
         }
         lista.add(novaCarga);
+        this.situacao.put(novaCarga.getId(), Situacao.ONGOING);
         ordenaLista();
     }
 
@@ -47,8 +54,35 @@ public class ListaCargas {
         return false;
     }
 
+    private boolean igual(int id) {
+        for (Carga c : lista) {
+            if (id == c.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void ordenaLista() {
         CargaIdComparator comparator = new CargaIdComparator();
         Collections.sort(lista, comparator);
+    }
+
+    public void alteraSituacao(int id, String situacao) {
+        if (!igual(id)) {
+            throw new Exception("Carga não cadastrada.");
+        }
+        if (this.situacao.get(id) != Situacao.ONGOING) {
+            throw new Exception("Situacao dessa carga não pode ser alterada pois se encontra "
+                    + this.situacao.get(id).getDescricao());
+        }
+        switch (situacao) {
+            case "CANCELLED":
+                this.situacao.put(id, Situacao.CANCELLED);
+                break;
+            case "DELIVERED":
+                this.situacao.put(id, Situacao.DELIVERED);
+                break;
+        }
     }
 }
