@@ -13,6 +13,7 @@ import application.enums.Situacao;
 public class ListaCargas {
     private ArrayList<Carga> lista;
     private Map<Integer, Situacao> situacao;
+    private static ListaCargas listaCargas;
 
     // inner class
     private class CargaIdComparator implements Comparator<Carga> {
@@ -23,9 +24,16 @@ public class ListaCargas {
         }
     }
 
-    public ListaCargas() {
+    private ListaCargas() {
         lista = new ArrayList<Carga>();
         situacao = new TreeMap<>();
+    }
+
+    public static ListaCargas ListaCargas() {
+        if(listaCargas == null) {
+            listaCargas = new ListaCargas();
+        }
+        return listaCargas;
     }
 
     public void cadastrarCarga(

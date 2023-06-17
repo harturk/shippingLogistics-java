@@ -32,6 +32,18 @@ public class ListaTipoCargas {
         this.lista = new ArrayList<TipoCarga>();
     }
 
+    public TipoCarga searchTipoCargas(int numero) {
+        if (lista.isEmpty()) {
+            throw new IllegalArgumentException("Nao ha tipo de cargas cadastrado.");
+        }
+        for (TipoCarga t : lista) {
+            if (t.getNumero() == numero) {
+                return t;
+            }
+        }
+        throw new IllegalArgumentException("Não existe tipo de carga com este identificador.");
+    }
+
     public void cadastrarTipoCargaDuravel(
             int numero,
             String descricao,

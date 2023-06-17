@@ -94,9 +94,8 @@ public class TelaPrincipal extends JFrame {
         this.botaoCadastrarCarga.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaCadastraPorto telaCadastrarPorto = new TelaCadastraPorto();
-                telaCadastrarPorto.setVisible(true);
-                dispose();
+                TelaCadastraCarga telaCadastraCarga = new TelaCadastraCarga();
+                telaCadastraCarga.setVisible(true);
             }
         });
     }
