@@ -19,6 +19,6 @@ public class TipoCargaPerecivel extends TipoCarga {
     }
 
     public String toString() {
-        return super.toString() + " Origem:" + this.getOrigem() + " Validade:" + this.getValidade();
+        return super.toString() + "<br>Origem: " + this.getOrigem() + "<br>Validade: " + this.getValidade()+"<html>";
     }
 }

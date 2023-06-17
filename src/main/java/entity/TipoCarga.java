@@ -24,7 +24,7 @@ public abstract class TipoCarga {
     }
 
     public String toString() {
-        return "Numero: " + this.numero + " Descricao: " + this.descricao;
+        return "<html>Numero: " + this.numero + "<br>Descricao: " + this.descricao;
     }
 
 }

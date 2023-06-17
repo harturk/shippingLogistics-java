@@ -36,9 +36,9 @@ public class Carga {
     }
 
     public String toString() {
-        String cargaData = "ID: " + this.id + " Peso: " + this.peso + " Valor Declarado: " + this.valorDeclarado
-                + "Tempo Máximo: "
-                + this.tempoMaximo + "\n";
+        String cargaData = "<html>ID: " + this.id + "<br>Peso: " + this.peso + "<br>Valor Declarado: " + this.valorDeclarado
+                + "<br>Tempo Máximo: "
+                + this.tempoMaximo + "<br><html>";
         return cargaData + this.tipoCarga.toString();
     }
 }

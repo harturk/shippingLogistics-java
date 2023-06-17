@@ -85,4 +85,12 @@ public class ListaTipoCargas {
         TipoCargaNumComparator comparator = new TipoCargaNumComparator();
         Collections.sort(lista, comparator);
     }
+
+    public ArrayList<String> getLista() {
+        ArrayList<String> listaS = new ArrayList<String>();
+        for (TipoCarga t : lista) {
+            listaS.add(t.toString());
+        }
+        return listaS;
+    }
 }

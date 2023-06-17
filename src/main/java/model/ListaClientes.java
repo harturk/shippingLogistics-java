@@ -70,4 +70,12 @@ public class ListaClientes {
         ClienteCodComparator comparator = new ClienteCodComparator();
         Collections.sort(lista, comparator);
     }
+
+    public ArrayList<String> getLista() {
+        ArrayList<String> listaClientes = new ArrayList<String>();
+        for (Cliente c : lista) {
+            listaClientes.add(c.toString());
+        }
+        return listaClientes;
+    }
 }

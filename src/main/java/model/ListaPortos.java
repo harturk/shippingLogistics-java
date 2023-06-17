@@ -56,4 +56,13 @@ public class ListaPortos {
         PortoIdComparator comparator = new PortoIdComparator();
         Collections.sort(lista, comparator);
     }
+
+    public ArrayList<String> getLista() {
+        ArrayList<String> portos = new ArrayList<String>();
+        for (Porto porto : lista) {
+            portos.add(porto.toString());
+        }
+        return portos;
+    }
+    
 }

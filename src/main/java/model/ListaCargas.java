@@ -76,7 +76,7 @@ public class ListaCargas {
         Collections.sort(lista, comparator);
     }
 
-    public void alteraSituacao(int id, String situacao) {
+    public void alteraSituacao(int id, String situacao) throws Exception {
         if (!igual(id)) {
             throw new Exception("Carga não cadastrada.");
         }
@@ -92,5 +92,13 @@ public class ListaCargas {
                 this.situacao.put(id, Situacao.DELIVERED);
                 break;
         }
+    }
+
+    public ArrayList<String> getLista(){
+        ArrayList<String> carga = new ArrayList<>();
+        for (Carga c : lista) {
+            carga.add(c.toString());
+        }
+        return carga;
     }
 }
