@@ -40,6 +40,7 @@ public class TelaCadastraTipoCargaDuravel extends JFrame{
         this.add(statusDescricao);
         this.add(statusSetor);
         this.add(statusMaterial);
+        this.add(statusIpi);
 
         setVisible(true);
     }
