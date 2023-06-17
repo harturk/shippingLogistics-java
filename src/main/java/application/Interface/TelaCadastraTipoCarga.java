@@ -1,7 +1,6 @@
 package application.Interface;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class TelaCadastraTipoCarga extends JFrame {
@@ -17,7 +16,7 @@ public class TelaCadastraTipoCarga extends JFrame {
         this.setVisible(true);
 
         setBotaoCadastrarTipoDeCargaPerecivel();
-        // setBotaoCadastrarTipoDeCargaDuravel();
+        setBotaoCadastrarTipoDeCargaDuravel();
         
         this.add(botaoCadastrarTipoDeCargaPerecivel);
         this.add(botaoCadastrarTipoDeCargaDuravel);
