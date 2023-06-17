@@ -22,4 +22,8 @@ public class Porto {
     public String getPais() {
         return this.pais;
     }
+
+    public String toString(){
+        return "<html>ID: "+ this.id + "<br>Nome:" + this.nome + "<br>Pais: " + this.pais+"<html>";
+    }
 }

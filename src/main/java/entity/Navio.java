@@ -45,4 +45,8 @@ public class Navio {
     public double getCustoPorMilhaBasico() {
         return this.custoPorMilhaBasico;
     }
+
+    public String toString(){
+        return "<html>Nome: " + this.nome + "<br>Velocidade: " + this.velocidade + "<br>Autonomia: " + this.autonomia + "<br>Custo por milha: " + this.custoPorMilhaBasico+"<html>" ;
+    }
 }

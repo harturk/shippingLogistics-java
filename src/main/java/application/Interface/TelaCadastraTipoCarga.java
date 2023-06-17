@@ -1,11 +1,15 @@
 package application.Interface;
 
 import javax.swing.*;
+
+import model.ListaTipoCargas;
+
 import java.awt.event.*;
 
 public class TelaCadastraTipoCarga extends JFrame {
     private JButton botaoCadastrarTipoDeCargaPerecivel;
     private JButton botaoCadastrarTipoDeCargaDuravel;
+    private JButton listar;
 
     public TelaCadastraTipoCarga() {
         super("Escolher tipo de carga");
@@ -17,6 +21,7 @@ public class TelaCadastraTipoCarga extends JFrame {
 
         setBotaoCadastrarTipoDeCargaPerecivel();
         setBotaoCadastrarTipoDeCargaDuravel();
+        setListar();
         
         this.add(botaoCadastrarTipoDeCargaPerecivel);
         this.add(botaoCadastrarTipoDeCargaDuravel);
@@ -47,4 +52,23 @@ public class TelaCadastraTipoCarga extends JFrame {
             }
         });
     }
+
+    private void setListar(){
+        listar = new JButton("Lista");
+        ListaTipoCargas a = ListaTipoCargas.ListaTipoCargas();
+        if(a.getLista().size() == 0){
+            listar.setEnabled(false);
+        }
+        listar.setBounds(botaoCadastrarTipoDeCargaPerecivel.getSize().width+15, botaoCadastrarTipoDeCargaPerecivel.getY()+40, listar.getPreferredSize().width, 20);
+        this.add(listar);
+        listar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaMostraLista tela = new TelaMostraLista(a.getLista());
+            }
+        });
+    }
+
+    
 }

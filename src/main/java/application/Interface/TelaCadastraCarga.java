@@ -1,6 +1,6 @@
 package application.Interface;
 
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import javax.swing.*;
 
@@ -16,6 +16,7 @@ public class TelaCadastraCarga extends JFrame {
     private JTextField tipoCarga;
     private JButton cadastrar;
     private JButton limpar;
+    private JButton listar;
     private JLabel statusId = new JLabel();
     private JLabel statusPeso = new JLabel();
     private JLabel statusValorDeclarado = new JLabel();
@@ -35,9 +36,10 @@ public class TelaCadastraCarga extends JFrame {
         setTempoMaximo();
         setTipoCarga();
 
+
         setBotaoCadastrar();
         setLimpar();
-
+        setListar();
         this.add(statusId);
         this.add(statusPeso);
         this.add(statusValorDeclarado);
@@ -141,6 +143,7 @@ public class TelaCadastraCarga extends JFrame {
                         ListaCargas lista = ListaCargas.ListaCargas();
                         lista.cadastrarCarga(idC, pesoC, valorDeclaradoC, tempoMaximoC, tipoCargaFinal);
                         setUltimoCadastro(idC, pesoC, valorDeclaradoC, tempoMaximoC, tipoCargaFinal);
+                        listar.setEnabled(true);
                     } catch (NumberFormatException f) {
                         JOptionPane.showMessageDialog(null,
                                 "Entrada invalida na entrada de " + invalidParameter + ", só é permitido numeros postivos");
@@ -181,6 +184,23 @@ public class TelaCadastraCarga extends JFrame {
             valorDeclarado.setText("");
             tempoMaximo.setText("");
             tipoCarga.setText("");
+        });
+    }
+
+    private void setListar(){
+        listar = new JButton("Lista");
+        ListaCargas a = ListaCargas.ListaCargas();
+        if(a.getLista().size() == 0){
+            listar.setEnabled(false);
+        }
+        listar.setBounds(cadastrar.getSize().width+15, cadastrar.getY(), listar.getPreferredSize().width, 20);
+        this.add(listar);
+        listar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaMostraLista tela = new TelaMostraLista(a.getLista());
+            }
         });
     }
 }

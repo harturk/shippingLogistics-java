@@ -22,4 +22,8 @@ public class Cliente {
     public String getEmail() {
         return this.email;
     }
+
+    public String toString(){
+        return "<html>Cod: " + this.cod+ "<br>nome: " + this.nome +"<br>email: "+ this.email+"<html>";
+    }
 }

@@ -92,4 +92,12 @@ public class ListaNavios {
         Collections.sort(lista, comparator);
     }
 
+    public ArrayList<String> getLista() {
+        ArrayList<String> navios = new ArrayList<String>();
+        for (Navio n : lista) {
+            navios.add(n.toString());
+        }
+        return navios;
+    }
+
 }
