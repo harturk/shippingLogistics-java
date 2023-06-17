@@ -22,6 +22,7 @@ public class TelaCadastrarNavio extends JFrame {
     private JLabel velocidadeStatus = new JLabel(); // na hora de apertar o botao limpar
     private JLabel autonomiaStatus = new JLabel();
     private JLabel custoPorMilhaStatus = new JLabel();
+    private JButton listar;
 
     public TelaCadastrarNavio() {
         super("Cadastrar Navio");
@@ -41,6 +42,8 @@ public class TelaCadastrarNavio extends JFrame {
         setBotaoCadastrar();
 
         setBotaoLimpa();
+
+        setListar();
 
         this.add(nomeStatus);
 
@@ -130,6 +133,7 @@ public class TelaCadastrarNavio extends JFrame {
                     ListaNavios lista = ListaNavios.listaNavios();
                     lista.cadastrarNavio(nomeN, velocidadeN, autonomiaN, custoPorMilhaN);
                     setUltimoCadastro(nomeN, velocidadeN, autonomiaN, custoPorMilhaN);
+                    listar.setEnabled(true);
                 } catch (NumberFormatException f) {
                     JOptionPane.showMessageDialog(null, "Entrada invalida na parte de " + estouro + ", " + estouro
                             + " só aceita numeros positivos");
@@ -181,6 +185,23 @@ public class TelaCadastrarNavio extends JFrame {
         custoPorMilhaStatus.setText("Custo por milha basico:" + custoPorMilhaN);
         custoPorMilhaStatus.setBounds(10, 220, 335, 20);
 
+    }
+
+    private void setListar(){
+        listar = new JButton("Lista");
+        ListaNavios a = ListaNavios.listaNavios();
+        if(a.getLista().size() == 0){
+            listar.setEnabled(false);
+        }
+        listar.setBounds(cadastrar.getSize().width+15, cadastrar.getY(), listar.getPreferredSize().width, 20);
+        this.add(listar);
+        listar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaMostraLista tela = new TelaMostraLista(a.getLista());
+            }
+        });
     }
 
 }

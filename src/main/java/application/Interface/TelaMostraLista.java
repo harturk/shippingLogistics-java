@@ -37,7 +37,6 @@ public class TelaMostraLista extends JFrame {
     }
 
     private void setTexto() {
-        System.out.println(lista.get(pagina));
 
         texto.setText(lista.get(pagina));
         texto.setBounds(10, 40, texto.getPreferredSize().width, texto.getPreferredSize().height);

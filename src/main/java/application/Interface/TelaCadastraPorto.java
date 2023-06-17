@@ -15,6 +15,7 @@ public class TelaCadastraPorto extends JFrame {
     private JTextField id;
     private JButton cadastrar;
     private JButton limpar;
+    private JButton listar;
     private JLabel statusNome = new JLabel();
     private JLabel statusPais = new JLabel();
     private JLabel statusId = new JLabel();
@@ -32,6 +33,8 @@ public class TelaCadastraPorto extends JFrame {
         setId();
 
         setCadastrar();
+
+        setListar();
 
         setLimpar();
 
@@ -89,6 +92,8 @@ public class TelaCadastraPorto extends JFrame {
                     setStatusNome(nomeP);
                     setStatusPais(paisP);
                     setStatusId(idP);
+                    listar.setEnabled(true);
+
                 } catch (NumberFormatException f) {
                     JOptionPane.showMessageDialog(null, "Entrada invalida na parte de ID");
 
@@ -131,6 +136,23 @@ public class TelaCadastraPorto extends JFrame {
     private void setStatusId(int id) {
         statusId.setText("ID: " + id);
         statusId.setBounds(10, 210, this.getWidth(), 20);
+    }
+
+    private void setListar(){
+        listar = new JButton("Lista");
+        ListaPortos a = ListaPortos.listaPortos();
+        if(a.getLista().size() == 0){
+            listar.setEnabled(false);
+        }
+        listar.setBounds(cadastrar.getSize().width+15, cadastrar.getY(), listar.getPreferredSize().width, 20);
+        this.add(listar);
+        listar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaMostraLista tela = new TelaMostraLista(a.getLista());
+            }
+        });
     }
 
 }

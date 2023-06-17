@@ -1,6 +1,6 @@
 package application.Interface;
 
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import javax.swing.*;
 
@@ -13,6 +13,7 @@ public class TelaCadastrarCliente extends JFrame {
     private JTextField email;
     private JButton cadastrar;
     private JButton limpar;
+    private JButton listar;
     private JLabel statusCod = new JLabel();
     private JLabel statusNome = new JLabel();
     private JLabel statusEmail = new JLabel();
@@ -29,6 +30,7 @@ public class TelaCadastrarCliente extends JFrame {
         setEmail();
 
         setBotaoCadastrar();
+        setListar();
         setLimpar();
 
         this.add(statusCod);
@@ -98,6 +100,8 @@ public class TelaCadastrarCliente extends JFrame {
                         ListaClientes lista = ListaClientes.listaClientes();
                         lista.cadastrarCliente(codC, nomeC, emailC);
                         setUltimoCadastro(codC, nomeC, emailC);
+                        listar.setEnabled(true);
+
                     } catch (NumberFormatException f) {
                         JOptionPane.showMessageDialog(null,
                                 "Entrada invalida na entrada de COD, só é permetido numeros postivos");
@@ -134,6 +138,23 @@ public class TelaCadastrarCliente extends JFrame {
             statusCod.setText("");
             statusNome.setText("");
             statusEmail.setText("");
+        });
+    }
+
+    private void setListar(){
+        listar = new JButton("Lista");
+        ListaClientes a = ListaClientes.listaClientes();
+        if(a.getLista().size() == 0){
+            listar.setEnabled(false);
+        }
+        listar.setBounds(cadastrar.getSize().width+15, cadastrar.getY(), listar.getPreferredSize().width, 20);
+        this.add(listar);
+        listar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TelaMostraLista tela = new TelaMostraLista(a.getLista());
+            }
         });
     }
 }
