@@ -10,6 +10,7 @@ import java.util.Comparator;
 
 public class ListaTipoCargas {
     private ArrayList<TipoCarga> lista;
+    private static ListaTipoCargas listaTipoCargas;
 
     // inner class
     private class TipoCargaNumComparator implements Comparator<TipoCarga> {
@@ -20,7 +21,14 @@ public class ListaTipoCargas {
         }
     }
 
-    public ListaTipoCargas() {
+    public static ListaTipoCargas ListaTipoCargas() {
+        if(listaTipoCargas == null) {
+            listaTipoCargas = new ListaTipoCargas();
+        }
+        return listaTipoCargas;
+    }
+
+    private ListaTipoCargas() {
         this.lista = new ArrayList<TipoCarga>();
     }
 
@@ -32,7 +40,7 @@ public class ListaTipoCargas {
             double ipi) {
         TipoCargaDuravel novoTipoCarga = new TipoCargaDuravel(numero, descricao, setor, material, ipi);
         if (igual(novoTipoCarga)) {
-            throw new Exception("Tipo de carga o mesmo numero já foi cadastrada, o cadastro foi cancelado.");
+            throw new IllegalArgumentException("Tipo de carga o mesmo numero já foi cadastrada, o cadastro foi cancelado.");
         }
         lista.add(novoTipoCarga);
         ordenaLista();
@@ -45,7 +53,7 @@ public class ListaTipoCargas {
             int validade) {
         TipoCargaPerecivel novoTipoCarga = new TipoCargaPerecivel(numero, descricao, origem, validade);
         if (igual(novoTipoCarga)) {
-            throw new Exception("Tipo de carga o mesmo numero já foi cadastrada, o cadastro foi cancelado.");
+            throw new IllegalArgumentException("Tipo de carga o mesmo numero já foi cadastrada, o cadastro foi cancelado.");
         }
         lista.add(novoTipoCarga);
         ordenaLista();
