@@ -1,9 +1,11 @@
 package application.enums;
 
 public enum Situacao {
-    ONGOING("Em andamento"),
-    DELIVERED("Finalizado"),
-    CANCELLED("Cancelado");
+    PENDENTE("Pendente"),
+    EM_ANDAMENTO("Em andamento"),
+    FINALIZADO("Finalizado"),
+    LOCADO("Locado"),
+    CANCELADO("Cancelado");
 
     private final String descricao;
 
