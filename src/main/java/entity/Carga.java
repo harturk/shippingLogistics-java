@@ -1,20 +1,30 @@
 package entity;
 
 import application.enums.CargaTipo;
+import application.enums.SituacaoCarga;
 
 public class Carga {
     private int id;
     private int peso;
+    private Porto origem;
+    private Porto destino;
+    private Cliente cliente;
     private double valorDeclarado;
     private int tempoMaximo;
     private TipoCarga tipoCarga;
+    private SituacaoCarga situacao;
 
-    public Carga(int id, int peso, double valorDeclarado, int tempoMaximo, TipoCarga tipoCarga) {
+    public Carga(int id, int peso, Porto origem, Porto destino, Cliente cliente, double valorDeclarado, int tempoMaximo,
+            TipoCarga tipoCarga) {
         this.id = id;
         this.peso = peso;
+        this.origem = origem;
+        this.destino = destino;
+        this.cliente = cliente;
         this.valorDeclarado = valorDeclarado;
         this.tempoMaximo = tempoMaximo;
         this.tipoCarga = tipoCarga;
+        this.situacao = SituacaoCarga.PENDENTE;
     }
 
     public int getId() {
@@ -37,6 +47,26 @@ public class Carga {
         return this.tipoCarga;
     }
 
+    public Porto getOrigem() {
+        return this.origem;
+    }
+
+    public Porto getDestino() {
+        return this.destino;
+    }
+
+    public Cliente getCliente() {
+        return this.cliente;
+    }
+
+    public SituacaoCarga getSituacao() {
+        return this.situacao;
+    }
+
+    public void setSituacao(SituacaoCarga situacao) {
+        this.situacao = situacao;
+    }
+
     public double calculaPreco() {
         if (this.tipoCarga.getTipo() == CargaTipo.DURAVEL) {
             return 1.5 * this.peso + ((TipoCargaDuravel) this.getTipoCarga()).getIpi();
@@ -45,7 +75,9 @@ public class Carga {
     }
 
     public String toString() {
-        String cargaData = "<html>ID: " + this.id + "<br>Peso: " + this.peso + "<br>Valor Declarado: " + this.valorDeclarado
+        String cargaData = "<html>ID: " + this.id + "<br>Peso: " + this.peso + "<br>Origem: " + this.origem.getId()
+                + "<br>Destino: " + this.destino.getId() + "<br>Cliente: " + this.cliente.getNome()
+                + "<br>Valor Declarado: " + this.valorDeclarado
                 + "<br>Tempo Máximo: "
                 + this.tempoMaximo + "<br><html>";
         return cargaData + this.tipoCarga.toString();
