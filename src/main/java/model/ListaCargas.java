@@ -48,7 +48,7 @@ public class ListaCargas {
             return;
         }
         lista.add(novaCarga);
-        this.situacao.put(novaCarga.getId(), Situacao.ONGOING);
+        this.situacao.put(novaCarga.getId(), Situacao.EM_ANDAMENTO);
         ordenaLista();
     }
 
@@ -80,16 +80,25 @@ public class ListaCargas {
         if (!igual(id)) {
             throw new Exception("Carga não cadastrada.");
         }
-        if (this.situacao.get(id) != Situacao.ONGOING) {
+        if (this.situacao.get(id) == Situacao.CANCELADO || this.situacao.get(id) == Situacao.FINALIZADO) {
             throw new Exception("Situacao dessa carga não pode ser alterada pois se encontra "
                     + this.situacao.get(id).getDescricao());
         }
         switch (situacao) {
-            case "CANCELLED":
-                this.situacao.put(id, Situacao.CANCELLED);
+            case "CANCELADO":
+                this.situacao.put(id, Situacao.CANCELADO);
                 break;
-            case "DELIVERED":
-                this.situacao.put(id, Situacao.DELIVERED);
+            case "FINALIZADO":
+                this.situacao.put(id, Situacao.FINALIZADO);
+                break;
+            case "PENDENTE":
+                this.situacao.put(id, Situacao.PENDENTE);
+                break;
+            case "LOCADO":
+                this.situacao.put(id, Situacao.LOCADO);
+                break;
+            case "EM_ANDAMENTO":
+                this.situacao.put(id, Situacao.EM_ANDAMENTO);
                 break;
         }
     }
