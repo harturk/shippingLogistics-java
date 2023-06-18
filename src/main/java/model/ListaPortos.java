@@ -42,6 +42,18 @@ public class ListaPortos {
         ordenaLista();
     }
 
+    public Porto searchPorto(int id) throws Exception {
+        if (lista.isEmpty()) {
+            throw new IllegalArgumentException("Nao ha porto cadastrado.");
+        }
+        for (Porto p : lista) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        throw new IllegalArgumentException("Não existe porto com este identificador.");
+    }
+
     private boolean igual(Porto porto) {
         int portoId = porto.getId();
         for (Porto p : lista) {
