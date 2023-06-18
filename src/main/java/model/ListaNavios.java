@@ -52,7 +52,7 @@ public class ListaNavios {
      */
     public void cadastrarNavio(String nome, double velocidade, double autonomia, double custoMilhaPorMilhaBasico) throws Exception {
         Navio novoNavio = new Navio(nome, velocidade, autonomia, custoMilhaPorMilhaBasico);
-        if (igual(novoNavio)) {
+        if (exists(novoNavio)) {
             throw new Exception("Navio com o mesmo nome já foi cadastrado, o cadastro foi cancelado.");
         }else if (velocidade<= 0){
             throw new Exception("A velocidade do navio não pode ser menor ou igual a zero, cadastro foi cancelado.");
@@ -73,7 +73,7 @@ public class ListaNavios {
      * @param navio que deseja verificar
      * @return  true se tiver um navio igual
      */
-    private boolean igual(Navio navio) {
+    private boolean exists(Navio navio) {
         String nomeNavio = navio.getNome().trim().toUpperCase();
         for (Navio n : lista) {
             String nomeN = n.getNome().trim().toUpperCase();
@@ -82,6 +82,18 @@ public class ListaNavios {
             }
         }
         return false;
+    }
+
+    public Navio searchNavio(String nomeNavio) {
+        if (lista.isEmpty()) {
+            throw new IllegalArgumentException("Nao ha navio cadastrado.");
+        }
+        for (Navio n : lista) {
+            if (n.getNome().equals(nomeNavio)) {
+                return n;
+            }
+        }
+        throw new IllegalArgumentException("Não existe navio com este identificador.");
     }
 
     /**
@@ -98,6 +110,10 @@ public class ListaNavios {
             navios.add(n.toString());
         }
         return navios;
+    }
+
+    public ArrayList<Navio> getNavios() {
+        return this.lista;
     }
 
 }
