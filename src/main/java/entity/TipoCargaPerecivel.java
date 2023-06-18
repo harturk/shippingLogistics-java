@@ -1,11 +1,13 @@
 package entity;
 
+import application.enums.CargaTipo;
+
 public class TipoCargaPerecivel extends TipoCarga {
     private String origem;
     private int validade;
 
     public TipoCargaPerecivel(int numero, String descricao, String origem, int validade) {
-        super(numero, descricao, 2);
+        super(numero, descricao, CargaTipo.PERECIVEL);
         this.origem = origem;
         this.validade = validade;
     }

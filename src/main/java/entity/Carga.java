@@ -1,5 +1,7 @@
 package entity;
 
+import application.enums.CargaTipo;
+
 public class Carga {
     private int id;
     private int peso;
@@ -33,6 +35,13 @@ public class Carga {
 
     public TipoCarga getTipoCarga() {
         return this.tipoCarga;
+    }
+
+    public double calculaPreco() {
+        if (this.tipoCarga.getTipo() == CargaTipo.DURAVEL) {
+            return 1.5 * this.peso + ((TipoCargaDuravel) this.getTipoCarga()).getIpi();
+        }
+        return this.peso * 2;
     }
 
     public String toString() {

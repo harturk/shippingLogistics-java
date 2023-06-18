@@ -1,14 +1,16 @@
 package entity;
 
+import application.enums.CargaTipo;
+
 public abstract class TipoCarga {
     private int numero;
     private String descricao;
-    private double fator;
+    private CargaTipo tipo;
 
-    public TipoCarga(int numero, String descricao, double fator) {
+    public TipoCarga(int numero, String descricao, CargaTipo tipo) {
         this.numero = numero;
         this.descricao = descricao;
-        this.fator = fator;
+        this.tipo = tipo;
     }
 
     public int getNumero() {
@@ -19,8 +21,8 @@ public abstract class TipoCarga {
         return this.descricao;
     }
 
-    public double getFator() {
-        return this.fator;
+    public CargaTipo getTipo() {
+        return this.tipo;
     }
 
     public String toString() {
