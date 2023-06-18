@@ -1,6 +1,6 @@
 package application.enums;
 
-public enum Situacao {
+public enum SituacaoCarga {
     PENDENTE("Pendente"),
     EM_ANDAMENTO("Em andamento"),
     FINALIZADO("Finalizado"),
@@ -9,7 +9,7 @@ public enum Situacao {
 
     private final String descricao;
 
-    private Situacao(final String descricao) {
+    private SituacaoCarga(final String descricao) {
         this.descricao = descricao;
     }
 
