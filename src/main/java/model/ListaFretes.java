@@ -35,7 +35,7 @@ public class ListaFretes {
     public void insereFrete(int idCarga, String prioridade) throws Exception {
         ListaCargas cargas = ListaCargas.listaCargas();
         Carga carga = cargas.searchCarga(idCarga);
-        if (cargas.getSituacao(carga) != SituacaoCarga.PENDENTE) {
+        if (carga.getSituacao() != SituacaoCarga.PENDENTE) {
             throw new Exception("Carga já se encontra atribuída a uma entrega.");
         }
         PrioridadeFrete prioridadeFrete = PrioridadeFrete.BARATO;
