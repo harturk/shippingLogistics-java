@@ -66,6 +66,18 @@ public class ListaClientes {
         return false;
     }
 
+    public Cliente searchCliente(int clienteId) {
+        if (lista.isEmpty()) {
+            throw new IllegalArgumentException("Nao ha cliente cadastrado.");
+        }
+        for (Cliente c : lista) {
+            if (c.getCod() == clienteId) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException("Não existe cliente com este identificador.");
+    }
+
     private void ordenaLista() {
         ClienteCodComparator comparator = new ClienteCodComparator();
         Collections.sort(lista, comparator);

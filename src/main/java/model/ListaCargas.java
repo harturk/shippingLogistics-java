@@ -30,16 +30,28 @@ public class ListaCargas {
         return listaCargas;
     }
 
+    private ListaCargas() {
+        lista = new ArrayList<Carga>();
+    }
+
     public void cadastrarCarga(
             int identificador,
             int peso,
-            Porto origem,
-            Porto destino,
-            Cliente cliente,
+            int origemId,
+            int destinoId,
+            int clienteId,
             double valorDeclarado,
             int tempoMaximo,
-            TipoCarga tipoCarga) throws Exception {
-        Carga novaCarga = new Carga(identificador, peso, origem, destino, cliente, valorDeclarado, tempoMaximo, tipoCarga);
+            int tipoCarga
+    ) throws Exception {
+        ListaPortos portos = ListaPortos.listaPortos();
+        ListaClientes clientes = ListaClientes.listaClientes();
+        Porto origem = portos.searchPorto(origemId);
+        Porto destino = portos.searchPorto(destinoId);
+        Cliente cliente = clientes.searchCliente(clienteId);
+        ListaTipoCargas listaTipoCargas = ListaTipoCargas.ListaTipoCargas();
+        TipoCarga tipoCargaFinal = listaTipoCargas.searchTipoCargas(tipoCarga);
+        Carga novaCarga = new Carga(identificador, peso, origem, destino, cliente, valorDeclarado, tempoMaximo, tipoCargaFinal);
         if (exists(novaCarga)) {
             throw new Exception("Carga com o mesmo identificador já foi cadastrada, o cadastro foi cancelado.");
         }
@@ -48,6 +60,9 @@ public class ListaCargas {
     }
 
     private boolean exists(Carga carga) {
+        if (lista == null || lista.isEmpty()) {
+            return false;
+        }
         int cargaId = carga.getId();
         for (Carga c : lista) {
             if (cargaId == c.getId()) {
