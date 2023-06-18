@@ -140,8 +140,8 @@ public class TelaCadastraCarga extends JFrame {
                         int tipoCargaC = Integer.parseInt(tipoCarga.getText());
                         ListaTipoCargas listaTipoCargas = ListaTipoCargas.ListaTipoCargas();
                         TipoCarga tipoCargaFinal = listaTipoCargas.searchTipoCargas(tipoCargaC);
-                        ListaCargas lista = ListaCargas.ListaCargas();
-                        lista.cadastrarCarga(idC, pesoC, valorDeclaradoC, tempoMaximoC, tipoCargaFinal);
+                        ListaCargas lista = ListaCargas.listaCargas();
+                        lista.cadastrarCarga(idC, pesoC, null, null, null, valorDeclaradoC, tempoMaximoC, tipoCargaFinal);
                         setUltimoCadastro(idC, pesoC, valorDeclaradoC, tempoMaximoC, tipoCargaFinal);
                         listar.setEnabled(true);
                     } catch (NumberFormatException f) {
