@@ -139,7 +139,13 @@ public class TelaPrincipal extends JFrame {
                     JOptionPane.showMessageDialog(null, "Digite o nome do arquivo");
                 }else{
                     Leitura l = Leitura.getLeitura(path);
-                    l.carregarTudo();
+                    try {
+                        l.carregarTudo();
+                        
+                    } catch (Exception e2) {
+                        JOptionPane.showMessageDialog(null, e2.getMessage());
+                        
+                    }
                 }
             }
         });

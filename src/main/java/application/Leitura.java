@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import model.*;
 
 /**
@@ -57,17 +59,19 @@ public class Leitura {
 
     }
 
-    public void carregarTudo(){
+    public void carregarTudo() throws Exception{
         carregarClientes();
         carregarDistancia();
         carregarNavios();
         carregarPortos();
+        // carregarTiposCargas();
+        carregarCargas();
     }
 
 
 
 
-    private void carregarClientes(){
+    private void carregarClientes() throws Exception{
         ListaClientes a = ListaClientes.listaClientes();
         try (Scanner sc = new Scanner(Files.newBufferedReader(clientes, Charset.defaultCharset()))) {
             sc.useDelimiter(";"); // separadores: ; e nova linha
@@ -81,15 +85,17 @@ public class Leitura {
                 
             }
         } catch (IOException e1) {
-            System.err.format("Erro de E/S: %s%n", e1);
-        } catch (Exception e2) {
-            System.out.println("Erro: " + e2);
-            System.out.print("Erro - trace da falha: ");
-            e2.printStackTrace();
-        }
+            JOptionPane.showMessageDialog(null, "Arquvio de clientes não foi achado!");
+
+        } 
+        // catch (Exception e2) {
+        //     System.out.println("Erro: " + e2);
+        //     System.out.print("Erro - trace da falha: ");
+        //     e2.printStackTrace();
+        // }
     }
 
-    private void carregarDistancia(){
+    private void carregarDistancia() throws Exception{
         ListaDistancia a = ListaDistancia.getInstance();
         try (Scanner sc = new Scanner(Files.newBufferedReader(distancia, Charset.defaultCharset()))) {
             sc.useDelimiter(";"); // separadores: ; e nova linha
@@ -103,15 +109,17 @@ public class Leitura {
                 
             }
         } catch (IOException e1) {
-            System.err.format("Erro de E/S: %s%n", e1);
-        } catch (Exception e2) {
-            System.out.println("Erro: " + e2);
-            System.out.print("Erro - trace da falha: ");
-            e2.printStackTrace();
-        }
+            JOptionPane.showMessageDialog(null, "Arquvio de distancias não foi achado!");
+
+        } 
+        // catch (Exception e2) {
+        //     System.out.println("Erro: " + e2);
+        //     System.out.print("Erro - trace da falha: ");
+        //     e2.printStackTrace();
+        // }
     }
 
-    private void carregarNavios(){
+    private void carregarNavios() throws Exception{
         ListaNavios a = ListaNavios.listaNavios();
         try (Scanner sc = new Scanner(Files.newBufferedReader(navios, Charset.defaultCharset()))) {
             sc.useDelimiter(";"); // separadores: ; e nova linha
@@ -129,15 +137,17 @@ public class Leitura {
                 
             }
         } catch (IOException e1) {
-            System.err.format("Erro de E/S: %s%n", e1);
-        } catch (Exception e2) {
-            System.out.println("Erro: " + e2);
-            System.out.print("Erro - trace da falha: ");
-            e2.printStackTrace();
-        }
+            JOptionPane.showMessageDialog(null, "Arquvio de navios não foi achado!");
+
+        } 
+        // catch (Exception e2) {
+        //     System.out.println("Erro: " + e2);
+        //     System.out.print("Erro - trace da falha: ");
+        //     e2.printStackTrace();
+        // }
     }
 
-    private void carregarPortos(){
+    private void carregarPortos() throws Exception{
         ListaPortos a = ListaPortos.listaPortos();
         try (Scanner sc = new Scanner(Files.newBufferedReader(portos, Charset.defaultCharset()))) {
             sc.useDelimiter(";"); // separadores: ; e nova linha
@@ -150,38 +160,71 @@ public class Leitura {
                 a.cadastrarPorto(id, nome, pais);                
             }
         } catch (IOException e1) {
-            System.err.format("Erro de E/S: %s%n", e1);
-        } catch (Exception e2) {
-            System.out.println("Erro: " + e2);
-            System.out.print("Erro - trace da falha: ");
-            e2.printStackTrace();
-        }
+            JOptionPane.showMessageDialog(null, "Arquvio de portos não foi achado!");
+
+        } 
+        // catch (Exception e2) {
+        //     System.out.println("Erro: " + e2);
+        //     System.out.print("Erro - trace da falha: ");
+        //     e2.printStackTrace();
+        // }
     }
 
-        // public void carregarCargas(){
-    //     try (Scanner sc = new Scanner(Files.newBufferedReader(cargas, Charset.defaultCharset()))) {
-    //         sc.useDelimiter(";"); // separadores: ; e nova linha
-    //         sc.nextLine();
-    //         while(sc.hasNextLine()){
-    //             // codigo;cliente;origem;destino;peso;valordeclarado;tempomaximo;tipocarga;prioridade;situacao
+        public void carregarCargas() throws Exception{
+        try (Scanner sc = new Scanner(Files.newBufferedReader(cargas, Charset.defaultCharset()))) {
+            sc.useDelimiter(";"); // separadores: ; e nova linha
+            sc.nextLine();
+            while(sc.hasNextLine()){
+                // codigo;cliente;origem;destino;peso;valordeclarado;tempomaximo;tipocarga;prioridade;situacao
 
-    //             int codigo = Integer.parseInt(sc.next());
-    //             String cliente = sc.next();
-    //             String origem = sc.next();
-    //             String destino = sc.next();
-    //             int peso = Integer.parseInt(sc.next());
-    //             String valorS = sc.next().replace(",", ".");
-    //             double valor = Double.parseDouble(valorS);
+                int codigo = Integer.parseInt(sc.next());
+                String cliente = sc.next();
+                String origem = sc.next();
+                String destino = sc.next();
+                int peso = Integer.parseInt(sc.next());
+                String valorS = sc.next().replace(",", ".");
+                double valor = Double.parseDouble(valorS);
+                Integer tempoMaximo = Integer.parseInt(sc.next());
+                int tipocarga = Integer.parseInt(sc.next());
+                String prioridade = sc.next();
+                String situacao = sc.nextLine().substring(1);
+
 
 
     
-    //         }
-    //     } catch (IOException e1) {
-    //         System.err.format("Erro de E/S: %s%n", e1);
-    //     } catch (Exception e2) {
-    //         System.out.println("Erro: " + e2);
-    //         System.out.print("Erro - trace da falha: ");
-    //         e2.printStackTrace();
-    //     }
-    // }
+            }
+        } catch (IOException e1) {
+            JOptionPane.showMessageDialog(null, "Arquvio de cargas não foi achado!");
+
+        } 
+        // catch (Exception e2) {
+        //     System.out.println("Erro: " + e2);
+        //     System.out.print("Erro - trace da falha: ");
+        //     e2.printStackTrace();
+        // }
+    }
+
+        public void carregarTiposCargas() throws Exception{
+            try (Scanner sc = new Scanner(Files.newBufferedReader(tiposCargas, Charset.defaultCharset()))) {
+                sc.useDelimiter(";"); // separadores: ; e nova linha
+                sc.nextLine();
+                while(sc.hasNextLine()){
+                    // Numero;descricao;categoria;origem_setor;tempomaximo_material
+                    int numero = Integer.parseInt(sc.next());
+                    String descricao = sc.next();
+                    String categoria = sc.next();
+                    String origemSetor = sc.next();
+                    String tempomaximo_material = sc.nextLine().substring(1).replace(",", ".");
+                    Double tempomax = Double.parseDouble(tempomaximo_material);
+                }
+            } catch (IOException e1) {
+                JOptionPane.showMessageDialog(null, "Arquvio de tipos cargas não foi achado!");
+
+            } 
+            // catch (Exception e2) {
+            //     System.out.println("Erro: " + e2);
+            //     System.out.print("Erro - trace da falha: ");
+            //     e2.printStackTrace();
+            // }
+        }
 }
