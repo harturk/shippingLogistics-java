@@ -48,7 +48,7 @@ public class ListaCargas {
             return;
         }
         lista.add(novaCarga);
-        this.situacao.put(novaCarga.getId(), Situacao.EM_ANDAMENTO);
+        this.situacao.put(novaCarga.getId(), Situacao.PENDENTE);
         ordenaLista();
     }
 
