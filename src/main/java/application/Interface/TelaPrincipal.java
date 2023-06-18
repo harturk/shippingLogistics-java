@@ -1,6 +1,9 @@
 package application.Interface;
 
 import javax.swing.*;
+
+import application.Leitura;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -11,14 +14,16 @@ public class TelaPrincipal extends JFrame {
     private JButton botaoCadastrarTipoDeCarga;
     private JButton botaoCadastrarCarga;
     private JButton botaoConsultarTodasAsCargas;
-    private JTextField nomeDoArquivo;
-    private JButton carregarNovoArquvio;
+
+    private JTextField textPath;
+    private JButton carregarPath;
+
 
     public TelaPrincipal() {
         super("Menu Principal");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBounds(100, 100, 500, 300);
-        this.setResizable(false);
+        this.setResizable(true);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setVisible(true);
@@ -29,6 +34,13 @@ public class TelaPrincipal extends JFrame {
         setBotaoCadastrarTipoDeCarga();
         setBotaoCadastrarCarga();
         setBotaoConsultarTodasAsCargas();
+
+        JButton a = new JButton("Carregar");
+        // a.setBounds(240, 150, 10, 30);
+        // this.add(a);
+
+        setCarregarArquivo();
+
         
         this.add(botaoCadastrarPorto);
         this.add(botaoCadastrarNavio);
@@ -111,6 +123,61 @@ public class TelaPrincipal extends JFrame {
                 dispose();
             }
         });
+    }
+
+    private void setCarregarArquivo(){
+        this.textPath = new JTextField();
+        this.textPath.setBounds(10, 150, 230, 20);
+        this.carregarPath = new JButton("Carregar");
+        this.carregarPath.setBounds(240, 150, 230, 30);
+
+        this.carregarPath.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String path = textPath.getText();
+                if(path.equals("")){
+                    JOptionPane.showMessageDialog(null, "Digite o nome do arquivo");
+                }else{
+                    Leitura l = Leitura.getLeitura(path);
+                    try {
+                        l.carregarTudo();
+                        
+                    } catch (Exception e2) {
+                        JOptionPane.showMessageDialog(null, e2.getMessage());
+                        
+                    }
+                }
+            }
+        });
+        this.add(textPath);
+        this.add(carregarPath);
+
+
+                // // setCarregarArquivo();
+        // // this.nomeDoArquivo = new JTextField();
+        // // this.nomeDoArquivo.setBounds(10, 150, 230, 30);
+        // this.carregarNovoArquvio = new JButton("Carregar");
+        // this.carregarNovoArquvio.setBounds(240, 150, carregarNovoArquvio.getPreferredSize().width, 30);
+        // // this.carregarNovoArquvio.addActionListener(new ActionListener() {
+        // //     @Override
+        // //     public void actionPerformed(ActionEvent e) {
+        // //         String path = nomeDoArquivo.getText();
+        // //         if(path.equals("")){
+        // //             JOptionPane.showMessageDialog(null, "Digite o nome do arquivo");
+        // //         }else{
+        // //             Leitura l = Leitura.getLeitura(path);
+                    
+        // //         }
+        // //     }
+        // // });
+        // // this.add(nomeDoArquivo);
+        // this.add(carregarNovoArquvio);
+
+        // this.nomeDoArquivo.setBackground(Color.WHITE);
+        // this.nomeDoArquivo.setForeground(Color.BLACK);
+        // this.nomeDoArquivo.setFont(new Font("Arial", Font.BOLD, 15));
+        // this.nomeDoArquivo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
     }
     
     
