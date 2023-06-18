@@ -1,18 +1,17 @@
 package model;
 
 import entity.Carga;
+import entity.Cliente;
+import entity.Porto;
 import entity.TipoCarga;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
 
-import application.enums.Situacao;
+import application.enums.SituacaoCarga;
 
 public class ListaCargas {
     private ArrayList<Carga> lista;
-    private Map<Integer, Situacao> situacao;
     private static ListaCargas listaCargas;
 
     // inner class
@@ -24,12 +23,7 @@ public class ListaCargas {
         }
     }
 
-    private ListaCargas() {
-        lista = new ArrayList<Carga>();
-        situacao = new TreeMap<>();
-    }
-
-    public static ListaCargas ListaCargas() {
+    public static ListaCargas listaCargas() {
         if(listaCargas == null) {
             listaCargas = new ListaCargas();
         }
@@ -39,32 +33,24 @@ public class ListaCargas {
     public void cadastrarCarga(
             int identificador,
             int peso,
+            Porto origem,
+            Porto destino,
+            Cliente cliente,
             double valorDeclarado,
             int tempoMaximo,
-            TipoCarga tipoCarga) {
-        Carga novaCarga = new Carga(identificador, peso, valorDeclarado, tempoMaximo, tipoCarga);
-        if (igual(novaCarga)) {
-            System.err.println("Carga com o mesmo identificador já foi cadastrada, o cadastro foi cancelado.");
-            return;
+            TipoCarga tipoCarga) throws Exception {
+        Carga novaCarga = new Carga(identificador, peso, origem, destino, cliente, valorDeclarado, tempoMaximo, tipoCarga);
+        if (exists(novaCarga)) {
+            throw new Exception("Carga com o mesmo identificador já foi cadastrada, o cadastro foi cancelado.");
         }
         lista.add(novaCarga);
-        this.situacao.put(novaCarga.getId(), Situacao.PENDENTE);
         ordenaLista();
     }
 
-    private boolean igual(Carga carga) {
+    private boolean exists(Carga carga) {
         int cargaId = carga.getId();
         for (Carga c : lista) {
             if (cargaId == c.getId()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean igual(int id) {
-        for (Carga c : lista) {
-            if (id == c.getId()) {
                 return true;
             }
         }
@@ -76,31 +62,16 @@ public class ListaCargas {
         Collections.sort(lista, comparator);
     }
 
-    public void alteraSituacao(int id, String situacao) throws Exception {
-        if (!igual(id)) {
-            throw new Exception("Carga não cadastrada.");
+    public Carga searchCarga(int idCarga) {
+        if (lista.isEmpty()) {
+            throw new IllegalArgumentException("Nao ha carga cadastrado.");
         }
-        if (this.situacao.get(id) == Situacao.CANCELADO || this.situacao.get(id) == Situacao.FINALIZADO) {
-            throw new Exception("Situacao dessa carga não pode ser alterada pois se encontra "
-                    + this.situacao.get(id).getDescricao());
+        for (Carga c : lista) {
+            if (c.getId() == idCarga) {
+                return c;
+            }
         }
-        switch (situacao) {
-            case "CANCELADO":
-                this.situacao.put(id, Situacao.CANCELADO);
-                break;
-            case "FINALIZADO":
-                this.situacao.put(id, Situacao.FINALIZADO);
-                break;
-            case "PENDENTE":
-                this.situacao.put(id, Situacao.PENDENTE);
-                break;
-            case "LOCADO":
-                this.situacao.put(id, Situacao.LOCADO);
-                break;
-            case "EM_ANDAMENTO":
-                this.situacao.put(id, Situacao.EM_ANDAMENTO);
-                break;
-        }
+        throw new IllegalArgumentException("Não existe carga com este identificador.");
     }
 
     public ArrayList<String> getLista(){
