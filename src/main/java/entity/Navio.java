@@ -1,20 +1,23 @@
 package entity;
 
+import application.enums.SituacaoNavio;
+
 public class Navio {
     private String nome;
     private double velocidade;
     private double autonomia;
     private double custoPorMilhaBasico;
+    private SituacaoNavio situacao;
 
     public Navio(String nome, double velocidade, double autonomia, double custoMilhaPorMilhaBasico) {
         this.nome = nome;
         this.velocidade = velocidade;
         this.autonomia = autonomia;
         this.custoPorMilhaBasico = custoMilhaPorMilhaBasico;
+        this.situacao = SituacaoNavio.LIVRE;
     }
 
     /**
-     * 
      * @return nome
      */
     public String getNome() {
@@ -22,7 +25,6 @@ public class Navio {
     }
 
     /**
-     * 
      * @return valocidade
      */
     public double getVelocidade() {
@@ -30,7 +32,6 @@ public class Navio {
     }
 
     /**
-     * 
      * @return autonomia
      */
     public double getAutonomia() {
@@ -38,12 +39,18 @@ public class Navio {
     }
 
     /**
-     * 
-     * 
      * @return custoPorMilhaBasico
      */
     public double getCustoPorMilhaBasico() {
         return this.custoPorMilhaBasico;
+    }
+
+    public SituacaoNavio getSituacao() {
+        return this.situacao;
+    }
+
+    public void setSituacao(SituacaoNavio situacao) {
+        this.situacao = situacao;
     }
 
     public String toString(){
