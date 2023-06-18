@@ -189,7 +189,7 @@ public class TelaCadastraCarga extends JFrame {
 
     private void setListar(){
         listar = new JButton("Lista");
-        ListaCargas a = ListaCargas.ListaCargas();
+        ListaCargas a = ListaCargas.listaCargas();
         if(a.getLista().size() == 0){
             listar.setEnabled(false);
         }
