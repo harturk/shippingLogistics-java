@@ -51,7 +51,7 @@ public class ListaFretes {
         this.alteraSituacaoNavio(navio);
     }
 
-    public boolean tempoTrajeto(Trajeto trajeto, Navio navio, Carga carga) {
+    public boolean validaTempoTrajeto(Trajeto trajeto, Navio navio, Carga carga) {
         if (carga.getTipoCarga().getTipo() == CargaTipo.DURAVEL) {
             return true;
         }
@@ -66,7 +66,7 @@ public class ListaFretes {
         Trajeto trajeto = trajetos.searchTrajeto(carga.getOrigem(), carga.getDestino());
         for (Navio n : navios.getNavios()) {
             if (n.getSituacao() == SituacaoNavio.LIVRE && n.getAutonomia() <= trajeto.getDistancia() 
-            && this.tempoTrajeto(trajeto, n, carga)) {
+            && this.validaTempoTrajeto(trajeto, n, carga)) {
                 return n;
             }
         }
