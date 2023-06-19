@@ -51,7 +51,7 @@ public class ListaTipoCargas {
             String material,
             double ipi) {
         TipoCargaDuravel novoTipoCarga = new TipoCargaDuravel(numero, descricao, setor, material, ipi);
-        if (igual(novoTipoCarga)) {
+        if (exists(novoTipoCarga)) {
             throw new IllegalArgumentException("Tipo de carga o mesmo numero já foi cadastrada, o cadastro foi cancelado.");
         }
         lista.add(novoTipoCarga);
@@ -64,14 +64,14 @@ public class ListaTipoCargas {
             String origem,
             int validade) {
         TipoCargaPerecivel novoTipoCarga = new TipoCargaPerecivel(numero, descricao, origem, validade);
-        if (igual(novoTipoCarga)) {
+        if (exists(novoTipoCarga)) {
             throw new IllegalArgumentException("Tipo de carga o mesmo numero já foi cadastrada, o cadastro foi cancelado.");
         }
         lista.add(novoTipoCarga);
         ordenaLista();
     }
 
-    private boolean igual(TipoCarga tipoCarga) {
+    private boolean exists(TipoCarga tipoCarga) {
         int tipoCargaNum = tipoCarga.getNumero();
         for (TipoCarga t : lista) {
             if (tipoCargaNum == t.getNumero()) {
