@@ -96,7 +96,7 @@ public class Leitura {
     }
 
     private void carregarDistancia() throws Exception{
-        ListaDistancia a = ListaDistancia.getInstance();
+        ListaTrajetos a = ListaTrajetos.getInstance();
         try (Scanner sc = new Scanner(Files.newBufferedReader(distancia, Charset.defaultCharset()))) {
             sc.useDelimiter(";"); // separadores: ; e nova linha
             sc.nextLine();
@@ -105,7 +105,7 @@ public class Leitura {
                 int destino = Integer.parseInt(sc.next());
                 String distanciaS = sc.nextLine().substring(1).replace(",", ".");
                 double distancia = Double.parseDouble(distanciaS);
-                a.cadastrarDistancia(origem, destino, distancia);
+                a.cadastrarTrajeto(origem, destino, distancia);
                 
             }
         } catch (IOException e1) {
