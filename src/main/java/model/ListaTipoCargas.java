@@ -21,7 +21,7 @@ public class ListaTipoCargas {
         }
     }
 
-    public static ListaTipoCargas ListaTipoCargas() {
+    public static ListaTipoCargas listaTipoCargas() {
         if(listaTipoCargas == null) {
             listaTipoCargas = new ListaTipoCargas();
         }

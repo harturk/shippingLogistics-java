@@ -109,7 +109,7 @@ public class TelaCadastraTipoCargaPerecivel extends JFrame{
                     try {
                         String numC = num.getText();
                         String validadeC = validade.getText();
-                        ListaTipoCargas lista = ListaTipoCargas.ListaTipoCargas();
+                        ListaTipoCargas lista = ListaTipoCargas.listaTipoCargas();
                         lista.cadastrarTipoCargaPerecivel(Integer.parseInt(numC), descricaoC, origemC, Integer.parseInt(validadeC));
                         setUltimoCadastro(Integer.parseInt(numC), descricaoC, origemC, Integer.parseInt(validadeC));
                     } catch (NumberFormatException f) {

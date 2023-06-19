@@ -127,7 +127,7 @@ public class TelaCadastraTipoCargaDuravel extends JFrame{
                         String numC = num.getText();
                         String materialC = material.getText();
                         String ipiC = ipi.getText();
-                        ListaTipoCargas lista = ListaTipoCargas.ListaTipoCargas();
+                        ListaTipoCargas lista = ListaTipoCargas.listaTipoCargas();
                         lista.cadastrarTipoCargaDuravel(Integer.parseInt(numC), descricaoC, setorC, materialC, Double.parseDouble(ipiC));
                         setUltimoCadastro(Integer.parseInt(numC), descricaoC, setorC, materialC, Double.parseDouble(ipiC));
                     } catch (NumberFormatException f) {

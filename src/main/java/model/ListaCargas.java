@@ -49,7 +49,7 @@ public class ListaCargas {
         Porto origem = portos.searchPorto(origemId);
         Porto destino = portos.searchPorto(destinoId);
         Cliente cliente = clientes.searchCliente(clienteId);
-        ListaTipoCargas listaTipoCargas = ListaTipoCargas.ListaTipoCargas();
+        ListaTipoCargas listaTipoCargas = ListaTipoCargas.listaTipoCargas();
         TipoCarga tipoCargaFinal = listaTipoCargas.searchTipoCargas(tipoCarga);
         Carga novaCarga = new Carga(identificador, peso, origem, destino, cliente, valorDeclarado, tempoMaximo, tipoCargaFinal);
         if (exists(novaCarga)) {

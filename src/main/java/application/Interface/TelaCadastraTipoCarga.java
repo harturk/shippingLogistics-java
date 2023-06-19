@@ -55,7 +55,7 @@ public class TelaCadastraTipoCarga extends JFrame {
 
     private void setListar(){
         listar = new JButton("Lista");
-        ListaTipoCargas a = ListaTipoCargas.ListaTipoCargas();
+        ListaTipoCargas a = ListaTipoCargas.listaTipoCargas();
         if(a.getLista().size() == 0){
             listar.setEnabled(false);
         }
