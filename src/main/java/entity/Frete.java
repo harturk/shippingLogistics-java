@@ -16,7 +16,7 @@ public class Frete {
         this.prioridade = prioridade;
         CustoRegiao regiao = CustoRegiao.INTERNACIONAL;
         if (carga.getDestino().getPais().equals(carga.getOrigem().getPais())) {
-            regiao = regiao.NACIONAL;
+            regiao = CustoRegiao.NACIONAL;
         }
         this.custoRegiao = regiao;
     }
