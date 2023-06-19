@@ -2,12 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
+import application.enums.CargaTipo;
 import application.enums.PrioridadeFrete;
 import application.enums.SituacaoCarga;
 import application.enums.SituacaoNavio;
 import entity.Carga;
 import entity.Frete;
 import entity.Navio;
+import entity.TipoCargaPerecivel;
 import entity.Trajeto;
 
 public class ListaFretes {
@@ -49,12 +51,22 @@ public class ListaFretes {
         this.alteraSituacaoNavio(navio);
     }
 
+    public boolean tempoTrajeto(Trajeto trajeto, Navio navio, Carga carga) {
+        if (carga.getTipoCarga().getTipo() == CargaTipo.DURAVEL) {
+            return true;
+        }
+        boolean validaValidade = (trajeto.getDistancia() / navio.getVelocidade()) <= ((TipoCargaPerecivel) carga.getTipoCarga()).getValidade();
+        boolean validaTempoMaximo = ((trajeto.getDistancia() / navio.getVelocidade()) <= carga.getTempoMaximo());
+        return validaValidade && validaTempoMaximo;
+    }
+
     public Navio getNavioDisponivel(Carga carga) throws Exception {
         ListaNavios navios = ListaNavios.listaNavios();
         ListaTrajetos trajetos = ListaTrajetos.getInstance();
         Trajeto trajeto = trajetos.searchTrajeto(carga.getOrigem(), carga.getDestino());
         for (Navio n : navios.getNavios()) {
-            if (n.getSituacao() == SituacaoNavio.LIVRE && n.getAutonomia() <= trajeto.getDistancia()) {
+            if (n.getSituacao() == SituacaoNavio.LIVRE && n.getAutonomia() <= trajeto.getDistancia() 
+            && this.tempoTrajeto(trajeto, n, carga)) {
                 return n;
             }
         }
