@@ -4,13 +4,13 @@ public enum PrioridadeFrete {
     BARATO(1),
     RAPIDO(2);
 
-    private final double fator;
+    private final int fator;
 
-    private PrioridadeFrete(final double fator) {
+    private PrioridadeFrete(final int fator) {
         this.fator = fator;
     }
 
-    public double getFator() {
+    public int getFator() {
         return this.fator;
     }
 }
