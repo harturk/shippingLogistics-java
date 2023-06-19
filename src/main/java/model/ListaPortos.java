@@ -33,7 +33,7 @@ public class ListaPortos {
 
     public void cadastrarPorto(int id, String nome, String pais) throws Exception {
         Porto novoPorto = new Porto(id, nome, pais);
-        if (igual(novoPorto)) {
+        if (exists(novoPorto)) {
             throw new Exception("Porto com o mesmo identificador já foi cadastrado, o cadastro foi cancelado.");
         }else if(id<0) {
             throw new Exception("O identificador do porto não pode ser negativo, o cadastro foi cancelado.");
@@ -54,7 +54,7 @@ public class ListaPortos {
         throw new IllegalArgumentException("Não existe porto com este identificador.");
     }
 
-    private boolean igual(Porto porto) {
+    private boolean exists(Porto porto) {
         int portoId = porto.getId();
         for (Porto p : lista) {
             if (portoId == p.getId()) {
