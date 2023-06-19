@@ -31,11 +31,11 @@ public class ListaClientes {
 
     public void cadastrarCliente(int cod, String nome, String email) throws Exception {
         Cliente novoCliente = new Cliente(cod, nome, email);
-        if (igualCod(novoCliente)) {
+        if (codExists(novoCliente)) {
             throw new Exception(
                     "Cliente com o mesmo código já foi cadastrado, o cadastro foi cancelado.");
         }
-        if (igualEmail(novoCliente)) {
+        if (emailExists(novoCliente)) {
             throw new Exception(
                     "Cliente com o mesmo email já foi cadastrado, o cadastro foi cancelado.");
         }
@@ -46,7 +46,7 @@ public class ListaClientes {
         ordenaLista();
     }
 
-    private boolean igualCod(Cliente cliente) {
+    private boolean codExists(Cliente cliente) {
         int clienteCod = cliente.getCod();
         for (Cliente c : lista) {
             if (clienteCod == c.getCod()) {
@@ -56,7 +56,7 @@ public class ListaClientes {
         return false;
     }
 
-    private boolean igualEmail(Cliente cliente) {
+    private boolean emailExists(Cliente cliente) {
         String clienteEmail = cliente.getEmail();
         for (Cliente c : lista) {
             if (clienteEmail.equals(c.getEmail())) {
