@@ -23,7 +23,12 @@ public class Cliente {
         return this.email;
     }
 
-    public String toString(){
+    public String toString() {
         return "<html>Cod: " + this.cod+ "<br>nome: " + this.nome +"<br>email: "+ this.email+"<html>";
+    }
+
+    public String toStringCSV() {
+        String data = this.cod + ";" + this.nome + ";" + this.email;
+        return data;
     }
 }

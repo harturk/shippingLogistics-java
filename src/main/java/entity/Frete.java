@@ -7,13 +7,11 @@ import model.ListaTrajetos;
 public class Frete {
     private Navio navio;
     private Carga carga;
-    private PrioridadeFrete prioridade;
     private CustoRegiao custoRegiao;
 
-    public Frete(Navio navio, Carga carga, PrioridadeFrete prioridade) {
+    public Frete(Navio navio, Carga carga) {
         this.navio = navio;
         this.carga = carga;
-        this.prioridade = prioridade;
         CustoRegiao regiao = CustoRegiao.INTERNACIONAL;
         if (carga.getDestino().getPais().equals(carga.getOrigem().getPais())) {
             regiao = CustoRegiao.NACIONAL;
@@ -29,10 +27,6 @@ public class Frete {
         return this.carga;
     }
 
-    public PrioridadeFrete getPrioridade() {
-        return this.prioridade;
-    }
-
     public CustoRegiao getCustoRegiao() {
         return this.custoRegiao;
     }
@@ -41,7 +35,7 @@ public class Frete {
         ListaTrajetos listaTrajetos = ListaTrajetos.getInstance();
         Trajeto trajeto = listaTrajetos.searchTrajeto(carga.getOrigem(), carga.getDestino());
         int fatorPrioridade = 1;
-        if (this.prioridade == PrioridadeFrete.RAPIDO) {
+        if (this.carga.getPrioridade() == PrioridadeFrete.RAPIDO) {
             fatorPrioridade = 2;
         }
         return (fatorPrioridade * this.navio.getCustoPorMilhaBasico()) * trajeto.getDistancia() + carga.calculaPreco() + this.custoRegiao.getCusto();

@@ -4,11 +4,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import entity.Cliente;
-import entity.Porto;
-import entity.TipoCarga;
 import model.ListaCargas;
-import model.ListaTipoCargas;
 
 public class TelaCadastraCarga extends JFrame {
     private JTextField id;
@@ -198,7 +194,7 @@ public class TelaCadastraCarga extends JFrame {
                         int clienteIdC = Integer.parseInt(cliente.getText());
                         ListaCargas lista = ListaCargas.listaCargas();
                         lista.cadastrarCarga(idC, pesoC, origemIdC, destinoIdC, clienteIdC, valorDeclaradoC,
-                                tempoMaximoC, tipoCargaC);
+                                tempoMaximoC, tipoCargaC, "BARATO", "PENDENTE");
                         setUltimoCadastro(idC, pesoC, origemIdC, destinoIdC, clienteIdC, valorDeclaradoC, tempoMaximoC,
                                 tipoCargaC);
                         listar.setEnabled(true);

@@ -26,4 +26,9 @@ public class Trajeto {
     public String toString(){
         return origem + " - " + destino + " - " + distancia;
     }
+
+    public String toStringCSV() {
+        String data = this.origem.getId() + ";" + this.destino + ";" + this.distancia;
+        return data;
+    }
 }
