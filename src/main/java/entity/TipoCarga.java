@@ -29,4 +29,6 @@ public abstract class TipoCarga {
         return "<html>Numero: " + this.numero + "<br>Descricao: " + this.descricao;
     }
 
+    public abstract String toStringCSV();
+
 }

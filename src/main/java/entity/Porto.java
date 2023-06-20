@@ -26,4 +26,9 @@ public class Porto {
     public String toString(){
         return "<html>ID: "+ this.id + "<br>Nome:" + this.nome + "<br>Pais: " + this.pais+"<html>";
     }
+
+    public String toStringCSV() {
+        String data = this.id + ";" + this.nome + ";" + this.pais;
+        return data;
+    }
 }

@@ -34,30 +34,27 @@ public class ListaFretes {
         return fretes;
     }
 
-    public void insereFrete(int idCarga, String prioridade) throws Exception {
+    public void insereFrete(int idCarga) throws Exception {
         ListaCargas cargas = ListaCargas.listaCargas();
         Carga carga = cargas.searchCarga(idCarga);
         if (carga.getSituacao() != SituacaoCarga.PENDENTE) {
             throw new Exception("Carga já se encontra atribuída a uma entrega.");
         }
-        PrioridadeFrete prioridadeFrete = PrioridadeFrete.BARATO;
-        if (prioridade.equals("RAPIDO")) {
-            prioridadeFrete = PrioridadeFrete.RAPIDO;
-        }
         Navio navio = getNavioDisponivel(carga);
-        Frete frete = new Frete(navio, carga, prioridadeFrete);
+        Frete frete = new Frete(navio, carga);
         lista.add(frete);
         this.alteraSituacaoCarga(carga, "LOCADO");
         this.alteraSituacaoNavio(navio);
     }
 
     public boolean validaTempoTrajeto(Trajeto trajeto, Navio navio, Carga carga) {
-        if (carga.getTipoCarga().getTipo() == CargaTipo.DURAVEL) {
-            return true;
+        int tempoMax = carga.getTempoMaximo();
+        // Tempo maximo será o menor valor entre a validade da carga e o tempo maximo de entrega, caso seja perecivel
+        if (carga.getTipoCarga().getTipo() == CargaTipo.PERECIVEL) {
+            tempoMax = tempoMax < ((TipoCargaPerecivel) carga.getTipoCarga()).getValidade() ? ((TipoCargaPerecivel) carga.getTipoCarga()).getValidade() : tempoMax;
         }
-        boolean validaValidade = (trajeto.getDistancia() / navio.getVelocidade()) <= ((TipoCargaPerecivel) carga.getTipoCarga()).getValidade();
-        boolean validaTempoMaximo = ((trajeto.getDistancia() / navio.getVelocidade()) <= carga.getTempoMaximo());
-        return validaValidade && validaTempoMaximo;
+        // Conversao de segundos para dias
+        return ((trajeto.getDistancia() / navio.getVelocidade()) / 86400) <= tempoMax;
     }
 
     public Navio getNavioDisponivel(Carga carga) throws Exception {

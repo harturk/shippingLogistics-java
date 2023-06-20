@@ -56,4 +56,9 @@ public class Navio {
     public String toString(){
         return "<html>Nome: " + this.nome + "<br>Velocidade: " + this.velocidade + "<br>Autonomia: " + this.autonomia + "<br>Custo por milha: " + this.custoPorMilhaBasico+"<html>" ;
     }
+
+    public String toStringCSV() {
+        String data = this.nome + ";" + this.velocidade + ";" + this.autonomia + ";" + this.custoPorMilhaBasico;
+        return data;
+    }
 }

@@ -89,4 +89,11 @@ public class Carga {
                 + this.tempoMaximo + "<br><html>";
         return cargaData + this.tipoCarga.toString();
     }
+
+    public String toStringCSV() {
+        String data = this.id + ";" + this.cliente.getCod() + ";" + this.origem.getId() + ";" + this.destino.getId()
+                + ";" + this.peso + ";" + this.valorDeclarado + ";" + this.tempoMaximo + ";"
+                + this.tipoCarga.getNumero() + ";" + this.prioridade + ";" + this.situacao;
+        return data;
+    }
 }
