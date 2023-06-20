@@ -172,21 +172,19 @@ public class Leitura {
             sc.useDelimiter(";"); // separadores: ; e nova linha
             sc.nextLine();
             while (sc.hasNextLine()) {
-                // codigo;cliente;origem;destino;peso;valordeclarado;tempomaximo;tipocarga;prioridade;situacao
-
                 int codigo = Integer.parseInt(sc.next());
-                String cliente = sc.next();
-                String origem = sc.next();
-                String destino = sc.next();
+                int cliente = Integer.parseInt(sc.next());
+                int origem = Integer.parseInt(sc.next());
+                int destino = Integer.parseInt(sc.next());
                 int peso = Integer.parseInt(sc.next());
                 String valorS = sc.next().replace(",", ".");
                 double valor = Double.parseDouble(valorS);
-                Integer tempoMaximo = Integer.parseInt(sc.next());
+                int tempoMaximo = Integer.parseInt(sc.next());
                 int tipocarga = Integer.parseInt(sc.next());
                 String prioridade = sc.next();
                 String situacao = sc.nextLine().substring(1);
 
-                a.cadastrarCarga(codigo, peso, origem, destino, cliente, valor, tempoMaximo, tipocarga);
+                a.cadastrarCarga(codigo, peso, origem, destino, cliente, valor, tempoMaximo, tipocarga, prioridade, situacao);
 
 
 
