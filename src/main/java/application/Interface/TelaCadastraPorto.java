@@ -16,6 +16,9 @@ public class TelaCadastraPorto extends JFrame {
     private JButton cadastrar;
     private JButton limpar;
     private JButton listar;
+
+
+    
     private JLabel statusNome = new JLabel();
     private JLabel statusPais = new JLabel();
     private JLabel statusId = new JLabel();

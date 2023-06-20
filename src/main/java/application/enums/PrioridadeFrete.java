@@ -13,4 +13,10 @@ public enum PrioridadeFrete {
     public int getFator() {
         return this.fator;
     }
+
+    public String getName() {
+        if(fator==1){
+            return "BARATO";
+        }return "RAPIDO";
+    }
 }
