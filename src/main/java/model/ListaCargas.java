@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import application.enums.PrioridadeFrete;
-import application.enums.SituacaoCarga;
 
 public class ListaCargas {
     private ArrayList<Carga> lista;

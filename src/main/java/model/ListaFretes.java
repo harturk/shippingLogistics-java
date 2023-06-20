@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 
 import application.enums.CargaTipo;
-import application.enums.PrioridadeFrete;
 import application.enums.SituacaoCarga;
 import application.enums.SituacaoNavio;
 import entity.Carga;
