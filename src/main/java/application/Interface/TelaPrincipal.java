@@ -13,7 +13,9 @@ public class TelaPrincipal extends JFrame {
     private JButton botaoCadastrarCliente;
     private JButton botaoCadastrarTipoDeCarga;
     private JButton botaoCadastrarCarga;
-    private JButton botaoConsultarTodasAsCargas;
+    private JButton botaoTrajeto;
+
+    private JButton alterarStatusCarga;
 
     private JTextField textPath;
     private JButton carregarPath;
@@ -23,7 +25,7 @@ public class TelaPrincipal extends JFrame {
         super("Menu Principal");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBounds(100, 100, 500, 300);
-        this.setResizable(true);
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setVisible(true);
@@ -33,11 +35,9 @@ public class TelaPrincipal extends JFrame {
         setBotaoCadastrarCliente();
         setBotaoCadastrarTipoDeCarga();
         setBotaoCadastrarCarga();
-        setBotaoConsultarTodasAsCargas();
+        setBotaoTrajeto();
+        setBotaoAlterarStatus();
 
-        JButton a = new JButton("Carregar");
-        // a.setBounds(240, 150, 10, 30);
-        // this.add(a);
 
         setCarregarArquivo();
 
@@ -47,8 +47,22 @@ public class TelaPrincipal extends JFrame {
         this.add(botaoCadastrarCliente);
         this.add(botaoCadastrarTipoDeCarga);
         this.add(botaoCadastrarCarga);
-        this.add(botaoConsultarTodasAsCargas);
+        this.add(botaoTrajeto);
 
+
+    }
+
+    private void setBotaoAlterarStatus(){
+        this.alterarStatusCarga = new JButton("Altera status carga");
+        this.alterarStatusCarga.setBounds(10, 130, 230, 30);
+        this.add(this.alterarStatusCarga);
+        this.alterarStatusCarga.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+                TelaAlteraSituacao altera = new TelaAlteraSituacao();
+                altera.setVisible(true);
+           }
+        });
 
     }
 
@@ -112,24 +126,23 @@ public class TelaPrincipal extends JFrame {
         });
     }
 
-    private void setBotaoConsultarTodasAsCargas() {
-        this.botaoConsultarTodasAsCargas = new JButton("Consultar Todas as Cargas");
-        this.botaoConsultarTodasAsCargas.setBounds(260, 90, 230, 30);
-        this.botaoConsultarTodasAsCargas.addActionListener(new ActionListener() {
+    private void setBotaoTrajeto() {
+        this.botaoTrajeto = new JButton("Fazer frete");
+        this.botaoTrajeto.setBounds(260, 90, 230, 30);
+        this.botaoTrajeto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaCadastraPorto telaCadastrarPorto = new TelaCadastraPorto();
-                telaCadastrarPorto.setVisible(true);
-                dispose();
+                TelaTrajeto a = new TelaTrajeto();
+                a.setVisible(true);
             }
         });
     }
 
     private void setCarregarArquivo(){
         this.textPath = new JTextField();
-        this.textPath.setBounds(10, 150, 230, 20);
+        this.textPath.setBounds(10, 225, 230, 30);
         this.carregarPath = new JButton("Carregar");
-        this.carregarPath.setBounds(240, 150, 230, 30);
+        this.carregarPath.setBounds(260, 225, 230, 30);
 
         this.carregarPath.addActionListener(new ActionListener() {
             @Override
