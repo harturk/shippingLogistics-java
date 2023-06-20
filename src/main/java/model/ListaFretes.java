@@ -107,4 +107,8 @@ public class ListaFretes {
         }
         navio.setSituacao(SituacaoNavio.OCUPADO);
     }
+
+    public ArrayList<Frete> getFretesList(){
+        return lista;
+    }
 }

@@ -30,6 +30,8 @@ public class Carga {
         this.prioridade = prioridade;
     }
 
+
+
     public int getId() {
         return this.id;
     }
