@@ -18,6 +18,7 @@ public class TelaMostraLista extends JFrame {
     public TelaMostraLista(ArrayList<String> lista) {
         super("Lista");
         setLocationRelativeTo(null);
+        this.setResizable(false);
         this.lista = lista;
 
         this.setLayout(null);
