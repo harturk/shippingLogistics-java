@@ -30,6 +30,8 @@ public class Carga {
         this.prioridade = prioridade;
     }
 
+
+
     public int getId() {
         return this.id;
     }
@@ -85,8 +87,10 @@ public class Carga {
         String cargaData = "<html>ID: " + this.id + "<br>Peso: " + this.peso + "<br>Origem: " + this.origem.getId()
                 + "<br>Destino: " + this.destino.getId() + "<br>Cliente: " + this.cliente.getNome()
                 + "<br>Valor Declarado: " + this.valorDeclarado
-                + "<br>Tempo Máximo: "
-                + this.tempoMaximo + "<br><html>";
+                + "<br>Tempo Máximo: " + this.tempoMaximo + "<br>Prioridade:" + this.prioridade.toString()
+                + "</br> Situação: " + this.situacao.getDescricao()
+
+                + "<br><html>";
         return cargaData + this.tipoCarga.toString();
     }
 

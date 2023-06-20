@@ -100,4 +100,8 @@ public class ListaCargas {
         }
         return carga;
     }
+
+    public ArrayList<Carga> getCargaLista() {
+        return lista;
+    }
 }

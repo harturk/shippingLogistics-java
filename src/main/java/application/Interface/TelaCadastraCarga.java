@@ -1,5 +1,6 @@
 package application.Interface;
 
+import java.awt.Color;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -26,12 +27,16 @@ public class TelaCadastraCarga extends JFrame {
     private JLabel statusOrigem = new JLabel();
     private JLabel statusDestino = new JLabel();
     private JLabel statusCliente = new JLabel();
+    private JToggleButton rapidoIbarato;
+    private boolean rapido;
+    private JLabel ponto;
+
 
     public TelaCadastraCarga() {
         super("Cadastrar carga");
         setSize(500, 500);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
         setLayout(null);
 
         setId();
@@ -42,6 +47,7 @@ public class TelaCadastraCarga extends JFrame {
         setOrigem();
         setDestino();
         setCliente();
+        setRapidoBarato();
 
         setBotaoCadastrar();
         setLimpar();
@@ -58,6 +64,33 @@ public class TelaCadastraCarga extends JFrame {
         setVisible(true);
     }
 
+    private void setRapidoBarato() {
+        rapidoIbarato = new JToggleButton("Rapido");
+        rapidoIbarato.setBounds(340, 250, 100, 20);
+        this.add(rapidoIbarato);
+
+        ponto = new JLabel("*");
+        ponto.setBounds(rapidoIbarato.getX()+110, rapidoIbarato.getY(), 50 , 20);
+        this.add(ponto);
+        rapidoIbarato.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(rapidoIbarato.isSelected()){
+                    rapido = true;
+                    ponto.setForeground(Color.green);
+                }else{
+                    rapido = false;
+                    ponto.setForeground(Color.black);
+                    
+                }
+            }
+
+            
+        });
+
+    }
+
     /**
      * Define o textfield id e o texto
      */
@@ -67,7 +100,7 @@ public class TelaCadastraCarga extends JFrame {
         this.add(idLabel);
 
         id = new JTextField();
-        id.setBounds(135, 10, 230, 20);
+        id.setBounds(180, 10, 230, 20);
         this.add(id);
     }
 
@@ -80,7 +113,7 @@ public class TelaCadastraCarga extends JFrame {
         this.add(pesoLabel);
 
         peso = new JTextField();
-        peso.setBounds(135, 40, 230, 20);
+        peso.setBounds(180, 40, 230, 20);
         this.add(peso);
     }
 
@@ -93,7 +126,7 @@ public class TelaCadastraCarga extends JFrame {
         this.add(valorDeclaradoLabel);
 
         valorDeclarado = new JTextField();
-        valorDeclarado.setBounds(135, 70, 230, 20);
+        valorDeclarado.setBounds(180, 70, 230, 20);
         this.add(valorDeclarado);
     }
 
@@ -106,7 +139,7 @@ public class TelaCadastraCarga extends JFrame {
         this.add(materialLabel);
 
         tempoMaximo = new JTextField();
-        tempoMaximo.setBounds(135, 100, 230, 20);
+        tempoMaximo.setBounds(180, 100, 230, 20);
         this.add(tempoMaximo);
     }
 
@@ -119,7 +152,7 @@ public class TelaCadastraCarga extends JFrame {
         this.add(tipoCargaLabel);
 
         tipoCarga = new JTextField();
-        tipoCarga.setBounds(135, 130, 230, 20);
+        tipoCarga.setBounds(180, 130, 230, 20);
         this.add(tipoCarga);
     }
 
@@ -132,7 +165,7 @@ public class TelaCadastraCarga extends JFrame {
         this.add(origemLabel);
 
         origem = new JTextField();
-        origem.setBounds(135, 160, 230, 20);
+        origem.setBounds(180, 160, 230, 20);
         this.add(origem);
     }
 
@@ -145,7 +178,7 @@ public class TelaCadastraCarga extends JFrame {
         this.add(destinoLabel);
 
         destino = new JTextField();
-        destino.setBounds(135, 190, 230, 20);
+        destino.setBounds(180, 190, 230, 20);
         this.add(destino);
     }
 
@@ -158,7 +191,7 @@ public class TelaCadastraCarga extends JFrame {
         this.add(clienteLabel);
 
         cliente = new JTextField();
-        cliente.setBounds(135, 220, 230, 20);
+        cliente.setBounds(180, 220, 230, 20);
         this.add(cliente);
     }
 
@@ -193,8 +226,15 @@ public class TelaCadastraCarga extends JFrame {
                         invalidParameter = "cliente";
                         int clienteIdC = Integer.parseInt(cliente.getText());
                         ListaCargas lista = ListaCargas.listaCargas();
+                        String prior = "";
+                        if(rapido){
+                            prior = "RAPIDO";
+                        }else{
+                            prior = "BARATO";
+                        }
+
                         lista.cadastrarCarga(idC, pesoC, origemIdC, destinoIdC, clienteIdC, valorDeclaradoC,
-                                tempoMaximoC, tipoCargaC, "BARATO", "PENDENTE");
+                                tempoMaximoC, tipoCargaC, prior, "PENDENTE");
                         setUltimoCadastro(idC, pesoC, origemIdC, destinoIdC, clienteIdC, valorDeclaradoC, tempoMaximoC,
                                 tipoCargaC);
                         listar.setEnabled(true);
