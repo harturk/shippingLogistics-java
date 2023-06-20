@@ -1,6 +1,7 @@
 package entity;
 
 import application.enums.CargaTipo;
+import application.enums.PrioridadeFrete;
 import application.enums.SituacaoCarga;
 
 public class Carga {
@@ -13,9 +14,10 @@ public class Carga {
     private int tempoMaximo;
     private TipoCarga tipoCarga;
     private SituacaoCarga situacao;
+    private PrioridadeFrete prioridade;
 
     public Carga(int id, int peso, Porto origem, Porto destino, Cliente cliente, double valorDeclarado, int tempoMaximo,
-            TipoCarga tipoCarga) {
+            TipoCarga tipoCarga, PrioridadeFrete prioridade) {
         this.id = id;
         this.peso = peso;
         this.origem = origem;
@@ -25,6 +27,7 @@ public class Carga {
         this.tempoMaximo = tempoMaximo;
         this.tipoCarga = tipoCarga;
         this.situacao = SituacaoCarga.PENDENTE;
+        this.prioridade = prioridade;
     }
 
     public int getId() {
@@ -65,6 +68,10 @@ public class Carga {
 
     public void setSituacao(SituacaoCarga situacao) {
         this.situacao = situacao;
+    }
+
+    public PrioridadeFrete getPrioridade() {
+        return this.prioridade;
     }
 
     public double calculaPreco() {

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import application.enums.PrioridadeFrete;
 import application.enums.SituacaoCarga;
 
 public class ListaCargas {
@@ -42,7 +43,9 @@ public class ListaCargas {
             int clienteId,
             double valorDeclarado,
             int tempoMaximo,
-            int tipoCarga
+            int tipoCarga,
+            String prioridade,
+            String situacao
     ) throws Exception {
         ListaPortos portos = ListaPortos.listaPortos();
         ListaClientes clientes = ListaClientes.listaClientes();
@@ -51,7 +54,8 @@ public class ListaCargas {
         Cliente cliente = clientes.searchCliente(clienteId);
         ListaTipoCargas listaTipoCargas = ListaTipoCargas.listaTipoCargas();
         TipoCarga tipoCargaFinal = listaTipoCargas.searchTipoCargas(tipoCarga);
-        Carga novaCarga = new Carga(identificador, peso, origem, destino, cliente, valorDeclarado, tempoMaximo, tipoCargaFinal);
+        PrioridadeFrete prioridadeFinal = prioridade.equals("RAPIDO") ? PrioridadeFrete.RAPIDO : PrioridadeFrete.BARATO;
+        Carga novaCarga = new Carga(identificador, peso, origem, destino, cliente, valorDeclarado, tempoMaximo, tipoCargaFinal, prioridadeFinal);
         if (exists(novaCarga)) {
             throw new Exception("Carga com o mesmo identificador já foi cadastrada, o cadastro foi cancelado.");
         }
