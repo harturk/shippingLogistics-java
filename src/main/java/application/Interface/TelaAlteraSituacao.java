@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import application.enums.SituacaoCarga;
-import application.enums.SituacaoNavio;
 import entity.Carga;
 import entity.Frete;
-import entity.Navio;
 import model.*;
 
 import java.awt.event.*;
@@ -20,7 +18,6 @@ public class TelaAlteraSituacao extends JFrame {
     private JToggleButton cancelar;
     private JToggleButton pendente;
     private JToggleButton finalizar;
-    private JToggleButton emAndamento;
 
     public TelaAlteraSituacao() {
         super("AlteraStatus");
@@ -57,13 +54,11 @@ public class TelaAlteraSituacao extends JFrame {
                 cancelar.setSelected(false);
                 pendente.setSelected(false);
                 finalizar.setSelected(false);
-                emAndamento.setSelected(false);
                 alterar.setEnabled(false);
                 SituacaoCarga situacao = carga.getSituacao();
                 if (situacao == SituacaoCarga.PENDENTE) {
                     pendente.setEnabled(false);
                     finalizar.setEnabled(false);
-                    emAndamento.setEnabled(false);
                     cancelar.setEnabled(true);
                     alterar.setEnabled(false);
 
@@ -71,27 +66,17 @@ public class TelaAlteraSituacao extends JFrame {
                     cancelar.setEnabled(false);
                     pendente.setEnabled(false);
                     finalizar.setEnabled(false);
-                    emAndamento.setEnabled(false);
                     alterar.setEnabled(false);
 
                 } else if (situacao == SituacaoCarga.CANCELADO) {
                     cancelar.setEnabled(false);
                     finalizar.setEnabled(false);
-                    emAndamento.setEnabled(false);
                     pendente.setEnabled(true);
                     alterar.setEnabled(false);
 
-                } else if (situacao == SituacaoCarga.EM_ANDAMENTO) {
-                    pendente.setEnabled(false);
-                    emAndamento.setEnabled(false);
-                    cancelar.setEnabled(true);
+                } else {
                     finalizar.setEnabled(true);
                     alterar.setEnabled(false);
-
-                } else {
-                    finalizar.setEnabled(false);
-                    alterar.setEnabled(false);
-                    emAndamento.setEnabled(true);
                     cancelar.setEnabled(true);
 
                 }
@@ -103,12 +88,10 @@ public class TelaAlteraSituacao extends JFrame {
         cancelar = new JToggleButton("Cancelado");
         pendente = new JToggleButton("Pendente");
         finalizar = new JToggleButton("Finalizado");
-        emAndamento = new JToggleButton("Em Andamento");
 
         cancelar.setBounds(120, 10, 125, 30);
         pendente.setBounds(cancelar.getX() + 135, 10, 125, 30);
 
-        emAndamento.setBounds(pendente.getX() + 135, 10, 125, 30);
         finalizar.setBounds(pendente.getX() + 135, 50, 125, 30);
 
         cancelar.addActionListener(new ActionListener() {
@@ -117,7 +100,6 @@ public class TelaAlteraSituacao extends JFrame {
                 // cancelar.setSelected(false);
                 pendente.setSelected(false);
                 finalizar.setSelected(false);
-                emAndamento.setSelected(false);
                 alterar.setEnabled(true);
 
             }
@@ -129,19 +111,6 @@ public class TelaAlteraSituacao extends JFrame {
                 cancelar.setSelected(false);
                 // pendente.setSelected(false);
                 finalizar.setSelected(false);
-                emAndamento.setSelected(false);
-                alterar.setEnabled(true);
-
-            }
-        });
-
-        emAndamento.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                cancelar.setSelected(false);
-                pendente.setSelected(false);
-                finalizar.setSelected(false);
-                // emAndamento.setSelected(false);
                 alterar.setEnabled(true);
 
             }
@@ -153,7 +122,6 @@ public class TelaAlteraSituacao extends JFrame {
                 cancelar.setSelected(false);
                 pendente.setSelected(false);
                 // finalizar.setSelected(false);
-                emAndamento.setSelected(false);
                 alterar.setEnabled(true);
 
             }
@@ -162,7 +130,6 @@ public class TelaAlteraSituacao extends JFrame {
         this.add(cancelar);
         this.add(pendente);
         this.add(finalizar);
-        this.add(emAndamento);
     }
 
     private void setAlterar() {
@@ -180,26 +147,16 @@ public class TelaAlteraSituacao extends JFrame {
                     carga.setSituacao(SituacaoCarga.CANCELADO);
                     ListaFretes fretes = ListaFretes.listaFretes();
                     ArrayList<Frete> freteArray = fretes.getFretesList();
-
-
-
-
                 } else if (pendente.isSelected()) {
                     carga.setSituacao(SituacaoCarga.PENDENTE);
 
                 } else if (finalizar.isSelected()) {
                     carga.setSituacao(SituacaoCarga.FINALIZADO);
-                } else if (emAndamento.isSelected()) {
-                    carga.setSituacao(SituacaoCarga.EM_ANDAMENTO);
-
-                    
-
                 }
 
                 cancelar.setEnabled(false);
                 pendente.setEnabled(false);
                 finalizar.setEnabled(false);
-                emAndamento.setEnabled(false);
                 statusCargas.setText(carga.toString());
 
             }

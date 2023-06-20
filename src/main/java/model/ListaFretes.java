@@ -44,7 +44,7 @@ public class ListaFretes {
         Frete frete = new Frete(navio, carga);
         lista.add(frete);
         this.alteraSituacaoCarga(carga, "LOCADO");
-        this.alteraSituacaoNavio(navio);
+        this.alteraSituacaoNavio(navio, SituacaoNavio.OCUPADO);
     }
 
     public boolean validaTempoTrajeto(Trajeto trajeto, Navio navio, Carga carga) {
@@ -73,11 +73,11 @@ public class ListaFretes {
 
     public void entregaCarga(Frete frete) throws Exception {
         this.alteraSituacaoCarga(frete.getCarga(), "FINALIZADO");
-        this.alteraSituacaoNavio(frete.getNavio());
+        this.alteraSituacaoNavio(frete.getNavio(), SituacaoNavio.LIVRE);
     }
 
     private void alteraSituacaoCarga(Carga carga, String situacao) throws Exception {
-        if (carga.getSituacao() == SituacaoCarga.CANCELADO || carga.getSituacao() == SituacaoCarga.FINALIZADO) {
+        if (carga.getSituacao().equals(SituacaoCarga.CANCELADO) || carga.getSituacao().equals(SituacaoCarga.FINALIZADO)) {
             throw new Exception("Situacao dessa carga não pode ser alterada pois se encontra "
                     + carga.getSituacao().getDescricao());
         }
@@ -94,18 +94,11 @@ public class ListaFretes {
             case "LOCADO":
                 carga.setSituacao(SituacaoCarga.LOCADO);
                 break;
-            case "EM_ANDAMENTO":
-                carga.setSituacao(SituacaoCarga.EM_ANDAMENTO);
-                break;
         }
     }
 
-    private void alteraSituacaoNavio(Navio navio) {
-        if (navio.getSituacao() == SituacaoNavio.OCUPADO) {
-            navio.setSituacao(SituacaoNavio.LIVRE);
-            return;
-        }
-        navio.setSituacao(SituacaoNavio.OCUPADO);
+    private void alteraSituacaoNavio(Navio navio, SituacaoNavio situacao) {
+        navio.setSituacao(situacao);
     }
 
     public ArrayList<Frete> getFretesList(){

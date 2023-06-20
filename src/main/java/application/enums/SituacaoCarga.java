@@ -2,7 +2,6 @@ package application.enums;
 
 public enum SituacaoCarga {
     PENDENTE("Pendente"),
-    EM_ANDAMENTO("Em andamento"),
     FINALIZADO("Finalizado"),
     LOCADO("Locado"),
     CANCELADO("Cancelado");
