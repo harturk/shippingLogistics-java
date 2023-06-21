@@ -48,7 +48,7 @@ public class TelaCarregamentoInicial extends JFrame{
                         fecha();
                         
                     } catch (Exception e2) {
-                        JOptionPane.showMessageDialog(null, e2.getMessage());
+                        JOptionPane.showMessageDialog(null,e2.getMessage());
                         
                     }
                 }
@@ -67,15 +67,29 @@ public class TelaCarregamentoInicial extends JFrame{
         ListaPortos portos = ListaPortos.listaPortos();
         ListaTipoCargas tipos = ListaTipoCargas.listaTipoCargas();
 
-        new TelaMostraLista(cargas.getLista());
-        new TelaMostraLista(clientes.getLista());
-        new TelaMostraLista(navios.getLista());
-        new TelaMostraLista(portos.getLista());
-        new TelaMostraLista(tipos.getLista());
-    
-        new TelaPrincipal();
+        String tela = "cargas";
 
-        this.dispose();
+        try {
+            new TelaMostraLista(cargas.getLista());
+            tela = "clientes";
+            new TelaMostraLista(clientes.getLista());
+            tela ="navios";
+            new TelaMostraLista(navios.getLista());
+            tela = "portos";
+            new TelaMostraLista(portos.getLista());
+            tela = "tipo de cargas";
+            new TelaMostraLista(tipos.getLista());
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null,"Não cadastrado nenhum "+ tela+" não possivel carregar uma lista vazia");
+            
+        } finally{
+            new TelaPrincipal();
+
+            this.dispose();
+        }
+
+    
+
     }
     
 }
