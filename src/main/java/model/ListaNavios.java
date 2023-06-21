@@ -116,4 +116,13 @@ public class ListaNavios {
         return this.lista;
     }
 
+
+    public ArrayList<String> getListCSV(){
+        ArrayList<String> a = new ArrayList<>();
+        for (Navio c : lista) {
+            a.add(c.toStringCSV());
+        }
+        return a;
+    }
+
 }

@@ -90,4 +90,12 @@ public class ListaClientes {
         }
         return listaClientes;
     }
+
+    public ArrayList<String> getListCSV(){
+        ArrayList<String> a = new ArrayList<>();
+        for (Cliente c : lista) {
+            a.add(c.toStringCSV());
+        }
+        return a;
+    }
 }

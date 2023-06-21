@@ -103,4 +103,12 @@ public class ListaCargas {
     public ArrayList<Carga> getCargaLista() {
         return lista;
     }
+
+    public ArrayList<String> getListCSV(){
+        ArrayList<String> carga = new ArrayList<>();
+        for (Carga c : lista) {
+            carga.add(c.toStringCSV());
+        }
+        return carga;
+    }
 }

@@ -54,4 +54,13 @@ public class ListaTrajetos {
         Trajeto d = new Trajeto(p1, p2, distancia);
         lista.add(d);
     }
+
+
+    public ArrayList<String> getListCSV(){
+        ArrayList<String> a = new ArrayList<>();
+        for (Trajeto c : lista) {
+            a.add(c.toStringCSV());
+        }
+        return a;
+    }
 }

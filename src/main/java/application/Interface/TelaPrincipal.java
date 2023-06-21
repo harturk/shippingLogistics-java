@@ -2,10 +2,13 @@ package application.Interface;
 
 import javax.swing.*;
 
+import application.Escrita;
 import application.Leitura;
+import model.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class TelaPrincipal extends JFrame {
     private JButton botaoCadastrarPorto;
@@ -20,6 +23,8 @@ public class TelaPrincipal extends JFrame {
     private JTextField textPath;
     private JButton carregarPath;
 
+    private JTextField salvarText;
+    private JButton salvarButton;
 
     public TelaPrincipal() {
         super("Menu Principal");
@@ -38,10 +43,9 @@ public class TelaPrincipal extends JFrame {
         setBotaoTrajeto();
         setBotaoAlterarStatus();
 
-
         setCarregarArquivo();
+        setSalvarArquivo();
 
-        
         this.add(botaoCadastrarPorto);
         this.add(botaoCadastrarNavio);
         this.add(botaoCadastrarCliente);
@@ -49,19 +53,18 @@ public class TelaPrincipal extends JFrame {
         this.add(botaoCadastrarCarga);
         this.add(botaoTrajeto);
 
-
     }
 
-    private void setBotaoAlterarStatus(){
+    private void setBotaoAlterarStatus() {
         this.alterarStatusCarga = new JButton("Altera status carga");
         this.alterarStatusCarga.setBounds(10, 130, 230, 30);
         this.add(this.alterarStatusCarga);
         this.alterarStatusCarga.addActionListener(new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 TelaAlteraSituacao altera = new TelaAlteraSituacao();
                 altera.setVisible(true);
-           }
+            }
         });
 
     }
@@ -138,7 +141,7 @@ public class TelaPrincipal extends JFrame {
         });
     }
 
-    private void setCarregarArquivo(){
+    private void setCarregarArquivo() {
         this.textPath = new JTextField();
         this.textPath.setBounds(10, 225, 230, 30);
         this.carregarPath = new JButton("Carregar");
@@ -148,16 +151,16 @@ public class TelaPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String path = textPath.getText();
-                if(path.equals("")){
+                if (path.equals("")) {
                     JOptionPane.showMessageDialog(null, "Digite o nome do arquivo");
-                }else{
+                } else {
                     Leitura l = Leitura.getLeitura(path);
                     try {
                         l.carregarTudo();
-                        
+
                     } catch (Exception e2) {
                         JOptionPane.showMessageDialog(null, e2.getMessage());
-                        
+
                     }
                 }
             }
@@ -165,35 +168,95 @@ public class TelaPrincipal extends JFrame {
         this.add(textPath);
         this.add(carregarPath);
 
+    }
 
-                // // setCarregarArquivo();
-        // // this.nomeDoArquivo = new JTextField();
-        // // this.nomeDoArquivo.setBounds(10, 150, 230, 30);
-        // this.carregarNovoArquvio = new JButton("Carregar");
-        // this.carregarNovoArquvio.setBounds(240, 150, carregarNovoArquvio.getPreferredSize().width, 30);
-        // // this.carregarNovoArquvio.addActionListener(new ActionListener() {
-        // //     @Override
-        // //     public void actionPerformed(ActionEvent e) {
-        // //         String path = nomeDoArquivo.getText();
-        // //         if(path.equals("")){
-        // //             JOptionPane.showMessageDialog(null, "Digite o nome do arquivo");
-        // //         }else{
-        // //             Leitura l = Leitura.getLeitura(path);
-                    
-        // //         }
-        // //     }
-        // // });
-        // // this.add(nomeDoArquivo);
-        // this.add(carregarNovoArquvio);
+    private void setSalvarArquivo() {
+        this.salvarText = new JTextField();
+        this.salvarText.setBounds(10, 190, 230, 30);
+        this.salvarButton = new JButton("Salvar");
+        this.salvarButton.setBounds(260, 190, 230, 30);
 
-        // this.nomeDoArquivo.setBackground(Color.WHITE);
-        // this.nomeDoArquivo.setForeground(Color.BLACK);
-        // this.nomeDoArquivo.setFont(new Font("Arial", Font.BOLD, 15));
-        // this.nomeDoArquivo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.salvarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String path = salvarText.getText();
+                if (path.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Digite o nome do arquivo");
+                } else {
+
+                    try {
+
+                        inicializaEscrita(path);
+
+                    } catch (Exception e2) {
+                        JOptionPane.showMessageDialog(null, e2.getMessage());
+
+                    }
+                }
+            }
+        });
+        this.add(salvarText);
+        this.add(salvarButton);
 
     }
-    
-    
 
-    
+    private void inicializaEscrita(String path) throws Exception {
+        String cargasS = path + "-CARGAS.CSV";
+        String clientesS = path + "-CLIENTES.CSV";
+        String naviosS = path + "-NAVIOS.CSV";
+        String portosS = path + "-PORTOS.CSV";
+        String tiposCargasS = path + "-TIPOSCARGAS.CSV";
+        String trajetoS = path + "-DISTANCIAS.CSV";
+
+        ListaCargas c = ListaCargas.listaCargas();
+        ListaClientes cli = ListaClientes.listaClientes();
+        ListaNavios n = ListaNavios.listaNavios();
+        ListaPortos p = ListaPortos.listaPortos();
+        ListaTipoCargas tc = ListaTipoCargas.listaTipoCargas();
+        ListaTrajetos tr = ListaTrajetos.getInstance();
+
+        ArrayList<String> cargaCSV = new ArrayList<String>();
+        ArrayList<String> clienteCSV = new ArrayList<String>();
+        ArrayList<String> navioCSV = new ArrayList<>();
+        ArrayList<String> portoCSV = new ArrayList<>();
+        ArrayList<String> tiposCargaCSV = new ArrayList<>();
+        ArrayList<String> trajetoCSV = new ArrayList<>();
+
+        cargaCSV.add("codigo;cliente;origem;destino;peso;valordeclarado;tempomaximo;tipocarga;prioridade;situacao");
+        cargaCSV.addAll(c.getListCSV());
+        clienteCSV.add("cod;nome;email");
+        clienteCSV.addAll(cli.getListCSV());
+        navioCSV.add("nome;velocidade;autonomia;customilhabasico");
+        navioCSV.addAll(n.getListCSV());
+        portoCSV.add("id;nome;pais");
+        portoCSV.addAll(p.getListCSV());
+        tiposCargaCSV.add("Numero;descricao;categoria;origem_setor;tempomaximo_material");
+        tiposCargaCSV.addAll(tc.getListCSV());
+        trajetoCSV.add("origem;destino;distancia");
+        trajetoCSV.addAll(tr.getListCSV());
+
+        Escrita cargaE = new Escrita(cargasS);
+        Escrita clienteE = new Escrita(clientesS);
+        Escrita naviosE = new Escrita(naviosS);
+        Escrita portoE = new Escrita(portosS);
+        Escrita tiposCargaE = new Escrita(tiposCargasS);
+        Escrita trajetoE = new Escrita(trajetoS);
+
+        cargaE.printOutput(cargaCSV);
+        clienteE.printOutput(clienteCSV);
+        naviosE.printOutput(navioCSV);
+        portoE.printOutput(portoCSV);
+        tiposCargaE.printOutput(tiposCargaCSV);
+        trajetoE.printOutput(trajetoCSV);
+
+        cargaE.closeOutput();
+        clienteE.closeOutput();
+        naviosE.closeOutput();
+        portoE.closeOutput();
+        tiposCargaE.closeOutput();
+        trajetoE.closeOutput();
+
+
+    }
+
 }
