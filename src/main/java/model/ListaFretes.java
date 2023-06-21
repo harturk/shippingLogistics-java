@@ -34,6 +34,11 @@ public class ListaFretes {
         return fretes;
     }
 
+    /**
+     * Insere (cadastra) um frete
+     * @param idCarga
+     * @throws Exception
+     */
     public void insereFrete(int idCarga) throws Exception {
         ListaCargas cargas = ListaCargas.listaCargas();
         Carga carga = cargas.searchCarga(idCarga);
@@ -48,6 +53,14 @@ public class ListaFretes {
         this.freteId = this.freteId + 1;
     }
 
+    /**
+     * Valida o tempo do trajeto de acordo com as informações 
+     * de validade (perecivel) e tempo máximo de entrega de uma carga
+     * @param Trajeto trajeto
+     * @param Navio navio
+     * @param Carga carga
+     * @return boolean
+     */
     public boolean validaTempoTrajeto(Trajeto trajeto, Navio navio, Carga carga) {
         int tempoMax = carga.getTempoMaximo();
         // Tempo maximo será o menor valor entre a validade da carga e o tempo maximo de entrega, caso seja perecivel
@@ -70,6 +83,13 @@ public class ListaFretes {
         throw new IllegalArgumentException("Não existe frete com este identificador.");
     }
 
+    /**
+     * Procura por um navio disponível, de acordo
+     * com os critérios de entrega da carga
+     * @param Carga carga
+     * @return Navio
+     * @throws Exception
+     */
     public Navio getNavioDisponivel(Carga carga) throws Exception {
         ListaNavios navios = ListaNavios.listaNavios();
         ListaTrajetos trajetos = ListaTrajetos.getInstance();
@@ -84,12 +104,25 @@ public class ListaFretes {
         throw new Exception("Nao existe navio disponivel para efetuar essa entrega.");
     }
 
+    /**
+     * Realiza entrega de uma carga
+     * @param frete
+     * @throws Exception
+     */
     public void entregaCarga(Frete frete) throws Exception {
         this.alteraSituacaoCarga(frete.getCarga(), "FINALIZADO");
         this.alteraSituacaoNavio(frete.getNavio(), SituacaoNavio.LIVRE);
     }
 
+    /**
+     * Altera a situação de uma carga
+     * @param carga
+     * @param situacao
+     * @throws Exception
+     */
     private void alteraSituacaoCarga(Carga carga, String situacao) throws Exception {
+        // Como regra de negócio, uma carga que se encontra cancelada ou finalizada não podem ter seu
+        // status alterado
         if (carga.getSituacao().equals(SituacaoCarga.CANCELADO) || carga.getSituacao().equals(SituacaoCarga.FINALIZADO)) {
             throw new Exception("Situacao dessa carga não pode ser alterada pois se encontra "
                     + carga.getSituacao().getDescricao());
@@ -110,6 +143,11 @@ public class ListaFretes {
         }
     }
 
+    /**
+     * Altera situação do navio (OCUPADO e LIVRE)
+     * @param navio
+     * @param situacao
+     */
     private void alteraSituacaoNavio(Navio navio, SituacaoNavio situacao) {
         navio.setSituacao(situacao);
     }
