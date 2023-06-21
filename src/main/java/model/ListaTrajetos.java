@@ -30,8 +30,7 @@ public class ListaTrajetos {
             }
         }
 
-        return new Trajeto(origem, destino, 100.0);
-        // throw new IllegalArgumentException("Não existe trajeto com essa origem e destino.");
+        throw new IllegalArgumentException("Não existe trajeto com essa origem e destino.");
     }
 
     public boolean exists(int origemId, int destinoId) {
