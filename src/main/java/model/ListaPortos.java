@@ -76,5 +76,14 @@ public class ListaPortos {
         }
         return portos;
     }
+
+
+    public ArrayList<String> getListCSV(){
+        ArrayList<String> a = new ArrayList<>();
+        for (Porto c : lista) {
+            a.add(c.toStringCSV());
+        }
+        return a;
+    }
     
 }

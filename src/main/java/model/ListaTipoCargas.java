@@ -93,4 +93,13 @@ public class ListaTipoCargas {
         }
         return listaS;
     }
+
+    
+    public ArrayList<String> getListCSV(){
+        ArrayList<String> a = new ArrayList<>();
+        for (TipoCarga c : lista) {
+            a.add(c.toStringCSV());
+        }
+        return a;
+    }
 }

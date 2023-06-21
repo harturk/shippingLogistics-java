@@ -29,7 +29,9 @@ public class ListaTrajetos {
                 return t;
             }
         }
-        throw new IllegalArgumentException("Não existe trajeto com essa origem e destino.");
+
+        return new Trajeto(origem, destino, 100.0);
+        // throw new IllegalArgumentException("Não existe trajeto com essa origem e destino.");
     }
 
     public boolean exists(int origemId, int destinoId) {
@@ -53,5 +55,14 @@ public class ListaTrajetos {
         Porto p2 = listaPortos.searchPorto(destino);
         Trajeto d = new Trajeto(p1, p2, distancia);
         lista.add(d);
+    }
+
+
+    public ArrayList<String> getListCSV(){
+        ArrayList<String> a = new ArrayList<>();
+        for (Trajeto c : lista) {
+            a.add(c.toStringCSV());
+        }
+        return a;
     }
 }
