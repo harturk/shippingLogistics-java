@@ -26,6 +26,8 @@ public class TelaPrincipal extends JFrame {
     private JTextField salvarText;
     private JButton salvarButton;
 
+    private JButton finalizar;
+
     public TelaPrincipal() {
         super("Menu Principal");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,6 +44,7 @@ public class TelaPrincipal extends JFrame {
         setBotaoCadastrarCarga();
         setBotaoTrajeto();
         setBotaoAlterarStatus();
+        setFinalizar();
 
         setCarregarArquivo();
         setSalvarArquivo();
@@ -53,6 +56,19 @@ public class TelaPrincipal extends JFrame {
         this.add(botaoCadastrarCarga);
         this.add(botaoTrajeto);
 
+    }
+
+    private void setFinalizar(){
+        finalizar = new JButton("Finalizar");
+        finalizar.setBounds(260,130 , 230,30);
+        this.add(finalizar);
+        finalizar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Encerra a aplicação
+                System.exit(0);
+            }
+        });
     }
 
     private void setBotaoAlterarStatus() {
