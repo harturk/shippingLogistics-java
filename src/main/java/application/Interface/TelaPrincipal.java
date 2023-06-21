@@ -56,7 +56,7 @@ public class TelaPrincipal extends JFrame {
     }
 
     private void setBotaoAlterarStatus() {
-        this.alterarStatusCarga = new JButton("Altera status carga");
+        this.alterarStatusCarga = new JButton("Gerencia Frete");
         this.alterarStatusCarga.setBounds(10, 130, 230, 30);
         this.add(this.alterarStatusCarga);
         this.alterarStatusCarga.addActionListener(new ActionListener() {
@@ -130,7 +130,7 @@ public class TelaPrincipal extends JFrame {
     }
 
     private void setBotaoTrajeto() {
-        this.botaoTrajeto = new JButton("Fazer frete");
+        this.botaoTrajeto = new JButton("Cadastrar frete");
         this.botaoTrajeto.setBounds(260, 90, 230, 30);
         this.botaoTrajeto.addActionListener(new ActionListener() {
             @Override

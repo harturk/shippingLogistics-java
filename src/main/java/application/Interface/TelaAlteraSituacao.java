@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import application.enums.SituacaoCarga;
-import entity.Carga;
+import application.enums.SituacaoNavio;
 import entity.Frete;
 import model.*;
 
 import java.awt.event.*;
 
 public class TelaAlteraSituacao extends JFrame {
-    private JLabel statusCargas;
-    private JComboBox cargas;
+    private JLabel statusFretes;
+    private JComboBox fretes;
     private JButton alterar;
     private JToggleButton cancelar;
     private JToggleButton pendente;
@@ -31,31 +31,33 @@ public class TelaAlteraSituacao extends JFrame {
     }
 
     private void setBoxCarga() {
-        ListaCargas a = ListaCargas.listaCargas();
-        ArrayList<Integer> idCargas = new ArrayList<>();
-        for (Carga n : a.getCargaLista()) {
-            idCargas.add(n.getId());
+        ListaFretes a = ListaFretes.listaFretes();
+        ArrayList<Integer> idFretes = new ArrayList<>();
+        for (Frete f : a.getFretesList()) {
+            if (f.getCarga().getSituacao().equals(SituacaoCarga.LOCADO)) {
+                idFretes.add(f.getId());
+            }
         }
 
-        statusCargas = new JLabel();
-        statusCargas.setBounds(10, 20, 200, 250);
-        this.add(statusCargas);
+        statusFretes = new JLabel();
+        statusFretes.setBounds(10, 20, 200, 250);
+        this.add(statusFretes);
 
-        cargas = new JComboBox<>(idCargas.toArray(new Integer[0]));
-        cargas.setBounds(10, 10, 100, 20);
-        this.add(cargas);
+        fretes = new JComboBox<>(idFretes.toArray(new Integer[0]));
+        fretes.setBounds(10, 10, 100, 20);
+        this.add(fretes);
 
-        cargas.addActionListener(new ActionListener() {
+        fretes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Integer selectedId = (Integer) cargas.getSelectedItem();
-                Carga carga = a.searchCarga(selectedId);
-                statusCargas.setText(carga.toString());
+                Integer selectedId = (Integer) fretes.getSelectedItem();
+                Frete frete = a.searchFrete(selectedId);
+                statusFretes.setText(frete.getCarga().toString());
                 cancelar.setSelected(false);
                 pendente.setSelected(false);
                 finalizar.setSelected(false);
                 alterar.setEnabled(false);
-                SituacaoCarga situacao = carga.getSituacao();
+                SituacaoCarga situacao = frete.getCarga().getSituacao();
                 if (situacao == SituacaoCarga.PENDENTE) {
                     pendente.setEnabled(false);
                     finalizar.setEnabled(false);
@@ -133,6 +135,7 @@ public class TelaAlteraSituacao extends JFrame {
     }
 
     private void setAlterar() {
+        ListaFretes a = ListaFretes.listaFretes();
         alterar = new JButton("Alterar");
         alterar.setBounds(pendente.getX() + 135, 110, 125, 30);
         this.add(alterar);
@@ -140,25 +143,21 @@ public class TelaAlteraSituacao extends JFrame {
         alterar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ListaCargas a = ListaCargas.listaCargas();
-                Integer selectedId = (Integer) cargas.getSelectedItem();
-                Carga carga = a.searchCarga(selectedId);
+                Integer selectedId = (Integer) fretes.getSelectedItem();
+                Frete frete = a.searchFrete(selectedId);
                 if (cancelar.isSelected()) {
-                    carga.setSituacao(SituacaoCarga.CANCELADO);
-                    ListaFretes fretes = ListaFretes.listaFretes();
-                    ArrayList<Frete> freteArray = fretes.getFretesList();
+                    frete.getCarga().setSituacao(SituacaoCarga.CANCELADO);
                 } else if (pendente.isSelected()) {
-                    carga.setSituacao(SituacaoCarga.PENDENTE);
+                    frete.getCarga().setSituacao(SituacaoCarga.PENDENTE);
 
                 } else if (finalizar.isSelected()) {
-                    carga.setSituacao(SituacaoCarga.FINALIZADO);
+                    frete.getCarga().setSituacao(SituacaoCarga.FINALIZADO);
                 }
-
+                frete.getNavio().setSituacao(SituacaoNavio.LIVRE);
                 cancelar.setEnabled(false);
                 pendente.setEnabled(false);
                 finalizar.setEnabled(false);
-                statusCargas.setText(carga.toString());
-
+                statusFretes.setText(frete.getCarga().toString());
             }
         });
 

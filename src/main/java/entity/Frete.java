@@ -5,11 +5,13 @@ import application.enums.PrioridadeFrete;
 import model.ListaTrajetos;
 
 public class Frete {
+    private int id;
     private Navio navio;
     private Carga carga;
     private CustoRegiao custoRegiao;
 
-    public Frete(Navio navio, Carga carga) {
+    public Frete(int id, Navio navio, Carga carga) {
+        this.id = id;
         this.navio = navio;
         this.carga = carga;
         CustoRegiao regiao = CustoRegiao.INTERNACIONAL;
@@ -17,6 +19,10 @@ public class Frete {
             regiao = CustoRegiao.NACIONAL;
         }
         this.custoRegiao = regiao;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public Navio getNavio() {

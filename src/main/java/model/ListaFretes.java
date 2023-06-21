@@ -14,6 +14,7 @@ import entity.Trajeto;
 public class ListaFretes {
     private static ListaFretes fretes;
     private ArrayList<Frete> lista;
+    int freteId = 1;
 
     /**
      * O constructor esta private pelo motivo que o objeto é um singleton
@@ -40,10 +41,11 @@ public class ListaFretes {
             throw new Exception("Carga já se encontra atribuída a uma entrega.");
         }
         Navio navio = getNavioDisponivel(carga);
-        Frete frete = new Frete(navio, carga);
+        Frete frete = new Frete(freteId, navio, carga);
         lista.add(frete);
         this.alteraSituacaoCarga(carga, "LOCADO");
         this.alteraSituacaoNavio(navio, SituacaoNavio.OCUPADO);
+        this.freteId = this.freteId + 1;
     }
 
     public boolean validaTempoTrajeto(Trajeto trajeto, Navio navio, Carga carga) {
@@ -54,6 +56,18 @@ public class ListaFretes {
         }
         // Conversao de segundos para dias
         return ((trajeto.getDistancia() / navio.getVelocidade()) / 86400) <= tempoMax;
+    }
+
+    public Frete searchFrete(int id) {
+        if (lista.isEmpty()) {
+            throw new IllegalArgumentException("Nao ha frete cadastrado.");
+        }
+        for (Frete f : lista) {
+            if (f.getId() == id) {
+                return f;
+            }
+        }
+        throw new IllegalArgumentException("Não existe frete com este identificador.");
     }
 
     public Navio getNavioDisponivel(Carga carga) throws Exception {
