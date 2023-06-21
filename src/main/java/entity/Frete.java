@@ -14,9 +14,9 @@ public class Frete {
         this.id = id;
         this.navio = navio;
         this.carga = carga;
-        CustoRegiao regiao = CustoRegiao.INTERNACIONAL;
-        if (carga.getDestino().getPais().equals(carga.getOrigem().getPais())) {
-            regiao = CustoRegiao.NACIONAL;
+        CustoRegiao regiao = CustoRegiao.NACIONAL;
+        if (!carga.getDestino().getPais().equals("Brasil") || !carga.getDestino().getPais().equals("Brasil")) {
+            regiao = CustoRegiao.INTERNACIONAL;
         }
         this.custoRegiao = regiao;
     }
@@ -45,6 +45,12 @@ public class Frete {
             fatorPrioridade = 2;
         }
         return (fatorPrioridade * this.navio.getCustoPorMilhaBasico()) * trajeto.getDistancia() + carga.calculaPreco() + this.custoRegiao.getCusto();
+    }
+
+    public String toString() {
+        String data = this.carga.toString();
+        data += "<html><br>Custo Frete: " + this.calculafrete() + "</html>";
+        return data;
     }
 }
 

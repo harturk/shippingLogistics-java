@@ -89,7 +89,6 @@ public class Carga {
                 + "<br>Valor Declarado: " + this.valorDeclarado
                 + "<br>Tempo Máximo: " + this.tempoMaximo + "<br>Prioridade:" + this.prioridade.toString()
                 + "</br> Situação: " + this.situacao.getDescricao()
-
                 + "<br><html>";
         return cargaData + this.tipoCarga.toString();
     }

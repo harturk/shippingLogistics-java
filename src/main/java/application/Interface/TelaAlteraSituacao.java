@@ -21,7 +21,7 @@ public class TelaAlteraSituacao extends JFrame {
 
     public TelaAlteraSituacao() {
         super("AlteraStatus");
-        this.setSize(520, 300);
+        this.setSize(520, 320);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
@@ -52,7 +52,8 @@ public class TelaAlteraSituacao extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Integer selectedId = (Integer) fretes.getSelectedItem();
                 Frete frete = a.searchFrete(selectedId);
-                statusFretes.setText(frete.getCarga().toString());
+                String cargaData = frete.toString();
+                statusFretes.setText(cargaData);
                 cancelar.setSelected(false);
                 pendente.setSelected(false);
                 finalizar.setSelected(false);
@@ -157,7 +158,8 @@ public class TelaAlteraSituacao extends JFrame {
                 cancelar.setEnabled(false);
                 pendente.setEnabled(false);
                 finalizar.setEnabled(false);
-                statusFretes.setText(frete.getCarga().toString());
+                String cargaData = frete.toString();
+                statusFretes.setText(cargaData);
             }
         });
 
