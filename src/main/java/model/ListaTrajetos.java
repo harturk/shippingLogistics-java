@@ -30,7 +30,9 @@ public class ListaTrajetos {
             }
         }
 
-        throw new IllegalArgumentException("Não existe trajeto com essa origem e destino.");
+        // Considera 100 milhas nauticas quando nao existe o trajeto
+        return new Trajeto(origem, destino, 100.0);
+        // throw new IllegalArgumentException("Não existe trajeto com essa origem e destino.");
     }
 
     public boolean exists(int origemId, int destinoId) {
